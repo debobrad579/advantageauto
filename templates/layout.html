@@ -13,7 +13,9 @@
         <nav>
             <div id="navbar">
                 <div id="navbar-elements">
-                    <div id="brand-title">Advantage Auto</div>
+                    <div id="brand-title">
+                        <a href="#">Advantage Auto</a>
+                    </div>
                     <div id="toggle-button">
                         <span></span>
                         <span></span>
@@ -22,9 +24,24 @@
                 </div>
                 <div id="navbar-links">
                     <ul>
-                        <li><a href="#" {% if active == 'home' %}class="active"{% endif %}>Home</a></li>
-                        <li><a href="#" {% if active == 'about' %}class="active"{% endif %}>About</a></li>
-                        <li><a href="#" {% if active == 'contact' %}class="active"{% endif %}>Contact</a></li>
+                        <li>
+                            <a href="#" {% if active == 'who_are_we' %}class="active"{% endif %}>Who are we?</a>
+                        </li>
+                        <li>
+                            <a href="#" {% if active == 'about' %}class="active"{% endif %}>Staff</a>
+                        </li>
+                        <li>
+                            <a href="#" {% if active == 'contact' %}class="active"{% endif %}>Services Offered</a>
+                        </li>
+                        <li>
+                            <a href="#" {% if active == 'contact' %}class="active"{% endif %}>Buying a used car?</a>
+                        </li>
+                        <li>
+                            <a href="#" {% if active == 'contact' %}class="active"{% endif %}>Vehicles we don't recommend buying</a>
+                        </li>
+                        <li>
+                            <a href="#" {% if active == 'contact' %}class="active"{% endif %}>Online appointment request</a>
+                        </li>
                     </ul>
                 </div>
             </div>

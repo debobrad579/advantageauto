@@ -1,7 +1,7 @@
 /* Variables */
 :root {
     --dark-gray: hsl(0, 0%, 20%);
-    --side-padding: 8%;
+    --side-padding: 5%;
 }
 
 @media (max-width: 600px) {
@@ -18,11 +18,19 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #content {
     padding: 0 var(--side-padding);
+}
+
+a {
+  color: hsl(216, 98%, 52%);
+}
+
+a:hover {
+  color: hsl(216, 91%, 42%);
 }
 
 /* Navbar */
@@ -39,11 +47,20 @@ nav {
     justify-content: space-between;
     align-items: center;
     z-index: initial;
+    padding: .5rem 0 .5rem 0;
 }
 
 #brand-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#brand-title a {
     font-size: 1.5rem;
-    margin: .5rem;
+    color: white;
+    text-decoration: none;
 }
 
 #navbar-links ul {
@@ -52,8 +69,12 @@ nav {
     display: flex;
 }
 
-#navbar-links, #navbar-elements {
-    padding: 0 var(--side-padding);
+#navbar-elements {
+    padding-left: var(--side-padding);
+}
+
+#navbar-links {
+    padding-right: var(--side-padding);
 }
 
 #navbar-links li {
@@ -62,7 +83,7 @@ nav {
 
 #navbar-links li a {
     text-decoration: none;
-    padding: 1rem;
+    margin-left: 1rem;
     display: block;
     color: hsl(0, 0%, 55%);
     transition: color .5s;
@@ -85,6 +106,7 @@ nav {
     justify-content: space-between;
     width: 30px;
     height: 21px;
+    cursor: pointer;
 }
 
 #toggle-button span {
@@ -103,9 +125,12 @@ nav {
     background-color: white;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1250px) {
     #toggle-button {
         display: flex;
+        margin-right: var(--side-padding);
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     #navbar-links {
@@ -114,7 +139,7 @@ nav {
         top: 100%;
         z-index: -1;
         background-color: var(--dark-gray);
-        transform: translateY(-110px);
+        transform: translateY(-230px);
         transition: transform .25s ease-in-out;
     }
 
