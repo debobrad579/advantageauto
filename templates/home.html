@@ -1,5 +1,40 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <h1>Hello, world!</h1>
+    <div class="grid-container">
+        <div>
+            <img src="{{ url_for('static', filename='img/shop.jpg') }}" alt="Shop Image" id="shop">
+        </div>
+        <div>
+            <div class="grid-container">
+                <div>
+                    <h2>Location:</h2>
+                    &ensp; <strong>Address:</strong>
+                    <br>
+                    &emsp; 576-D Elgin Street
+                    <br>
+                    &emsp; Brantford, ON
+                    <br>
+                    &emsp; N3S 7X2
+                    <br>
+                    &ensp; <strong>Phone:</strong> 519-752-8629
+                </div>
+                <div>
+                    <h1>Insert Map Here</h1>
+                </div>
+            </div>
+            <div>
+                <h2>Hours:</h2>
+                <ul>
+                    <li>Sunday: Closed</li>
+                    <li>Monday: 8 am - 5 pm</li>
+                    <li>Tuesday: 8 am - 5 pm</li>
+                    <li>Wednesday: 8 am - 5 pm</li>
+                    <li>Thursday: 8 am - 5 pm</li>
+                    <li>Friday: 8 am - 1:30 pm</li>
+                    <li>Saturday: Closed</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 {% endblock %}
