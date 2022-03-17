@@ -1,6 +1,6 @@
 /* Variables */
 :root {
-    --dark-gray: hsl(0, 0%, 20%);
+    --dark-gray: hsl(0, 0%, 10%);
     --side-padding: 5%;
 }
 
@@ -125,7 +125,7 @@ nav {
     background-color: white;
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1100px) {
     #toggle-button {
         display: flex;
         margin-right: var(--side-padding);

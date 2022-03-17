@@ -14,7 +14,9 @@
             <div id="navbar">
                 <div id="navbar-elements">
                     <div id="brand-title">
-                        <a href="#">Advantage Auto</a>
+                        <a href="{{ url_for('home') }}">
+                            <img src="{{ url_for('static', filename='img/logo.png') }}" width="200px" alt="Advantage Auto">
+                        </a>
                     </div>
                     <div id="toggle-button">
                         <span></span>
@@ -25,22 +27,22 @@
                 <div id="navbar-links">
                     <ul>
                         <li>
-                            <a href="#" {% if active == 'who_are_we' %}class="active"{% endif %}>Who are we?</a>
+                            <a href="{{ url_for('who_we_are') }}" {% if active == 'who_we_are' %}class="active"{% endif %}>Who we are</a>
                         </li>
                         <li>
-                            <a href="#" {% if active == 'about' %}class="active"{% endif %}>Staff</a>
+                            <a href="{{ url_for('staff') }}" {% if active == 'staff' %}class="active"{% endif %}>Staff</a>
                         </li>
                         <li>
-                            <a href="#" {% if active == 'contact' %}class="active"{% endif %}>Services Offered</a>
+                            <a href="{{ url_for('services') }}" {% if active == 'services' %}class="active"{% endif %}>Services Offered</a>
                         </li>
                         <li>
-                            <a href="#" {% if active == 'contact' %}class="active"{% endif %}>Buying a used car?</a>
+                            <a href="{{ url_for('used_car') }}" {% if active == 'used_car' %}class="active"{% endif %}>Buying a used car?</a>
                         </li>
                         <li>
-                            <a href="#" {% if active == 'contact' %}class="active"{% endif %}>Vehicles we don't recommend buying</a>
+                            <a href="{{ url_for('avoid') }}" {% if active == 'avoid' %}class="active"{% endif %}>Vehicles to avoid</a>
                         </li>
                         <li>
-                            <a href="#" {% if active == 'contact' %}class="active"{% endif %}>Online appointment request</a>
+                            <a href="{{ url_for('appointment') }}" {% if active == 'appointment' %}class="active"{% endif %}>Online appointment request</a>
                         </li>
                     </ul>
                 </div>
