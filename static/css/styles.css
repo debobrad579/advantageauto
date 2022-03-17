@@ -1,6 +1,8 @@
 /* Variables */
 :root {
-    --dark-gray: hsl(0, 0%, 10%);
+    --dark-gray: hsl(0, 0%, 30%);
+    --light-gray: hsl(0, 0%, 65%);
+    --lighter-gray: hsl(0, 0%, 85%);
     --side-padding: 5%;
 }
 
@@ -85,12 +87,12 @@ nav {
     text-decoration: none;
     margin-left: 1rem;
     display: block;
-    color: hsl(0, 0%, 55%);
+    color: var(--light-gray);
     transition: color .5s;
 }
 
 #navbar-links li a:hover {
-    color: hsl(0, 0%, 75%);
+    color: var(--lighter-gray);
 }
 
 #navbar-links li a.active {
@@ -112,13 +114,13 @@ nav {
 #toggle-button span {
     height: 17%;
     width: 100%;
-    background-color: hsl(0, 0%, 55%);
+    background-color: var(--light-gray);
     border-radius: 10px;
     transition: background-color .5s;
 }
 
 #toggle-button:hover span {
-    background-color: hsl(0, 0%, 75%);
+    background-color: var(--lighter-gray);
 }
 
 #navbar.expanded #toggle-button span {
