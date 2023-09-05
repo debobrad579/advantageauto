@@ -1,0 +1,59 @@
+:root {
+  --dark-grey: hsl(210, 11%, 15%);
+  --side-padding: 5%;
+  --grey: hsl(0, 0%, 55%);
+  --light-grey: hsl(0, 0%, 85%);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  height: 100%;
+}
+
+#content {
+  padding: 7rem var(--side-padding) 6rem;
+}
+
+a {
+  color: hsl(216, 98%, 52%);
+  text-decoration: none;
+}
+
+a:hover {
+  color: hsl(216, 91%, 42%);
+}
+
+ul:not(#navbar-links) > li {
+  margin-bottom: 8px;
+}
+
+.photo {
+  width: 100%;
+  border: 2px solid var(--dark-grey);
+}
+
+.grid-container {
+  display: grid;
+  grid-column-gap: 20px;
+  grid-template-columns: auto auto;
+}
+.grid-container-4 {
+  display: grid;
+  grid-column-gap: 20px;
+  grid-template-columns: auto auto auto auto;
+}
+
+@media (max-width: 1200px) {
+  .grid-container-4 {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (max-width: 830px) {
+  .grid-container,
+  .grid-container-4 {
+    grid-template-columns: auto;
+  }
+}
