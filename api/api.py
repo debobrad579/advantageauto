@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from flask_cors import CORS
 from email.message import EmailMessage
 import ssl
@@ -51,9 +51,9 @@ Additional Information:
             smtp.login(email_sender, password)
             smtp.sendmail(email_sender, email_receiver, em.as_string())
         
-        return jsonify({"success": True})
+        return {"success": True}
     except:
-        return jsonify({"success": False})
+        return {"success": False}
 
 
 def format_services(*services):
@@ -81,4 +81,4 @@ def format_time(time):
      
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port='8000')

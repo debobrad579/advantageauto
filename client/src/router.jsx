@@ -81,27 +81,30 @@ export const router = createBrowserRouter([
           if (numericTime < 8 || numericTime > 17)
             return { time: "Please select a time between 8:00 AM and 5:00 PM." }
 
-          const response = await fetch("http://127.0.0.1:5000/api", {
-            method: "POST",
-            signal: request.signal,
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name,
-              phone,
-              email,
-              year,
-              make,
-              model,
-              service1,
-              service2,
-              service3,
-              date,
-              time,
-              additional,
-            }),
-          }).then(res => res.json())
+          const response = await fetch(
+            "https://advantageauto.onrender.com:8000/api",
+            {
+              method: "POST",
+              signal: request.signal,
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name,
+                phone,
+                email,
+                year,
+                make,
+                model,
+                service1,
+                service2,
+                service3,
+                date,
+                time,
+                additional,
+              }),
+            }
+          ).then(res => res.json())
 
           return { success: response.success }
         },

@@ -38,7 +38,7 @@ export function Select({ label, defaultValue, name, options, error }) {
           ))}
         </select>
         {showError && showErrorPopup && (
-          <div className="error-tip">{error}</div>
+          <div className="error-popup">{error}</div>
         )}
       </td>
     </tr>

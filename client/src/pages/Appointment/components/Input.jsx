@@ -33,7 +33,7 @@ export function Input({ label, name, type = "text", error }) {
           onFocus={handleFocus}
         />
         {showError && showErrorPopup && (
-          <div className="error-tip">{error}</div>
+          <div className="error-popup">{error}</div>
         )}
       </td>
     </tr>
