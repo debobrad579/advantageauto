@@ -19,8 +19,12 @@ export function useErrorHandling(error, ref) {
     setShowError(false)
   }
 
-  function handleKeyDown() {
-    if (type === "number" && e.key.length === 1 && /\D/.test(e.key)) {
+  function handleKeyDown(e) {
+    if (
+      ref.current.type === "number" &&
+      e.key.length === 1 &&
+      /\D/.test(e.key)
+    ) {
       e.preventDefault()
     }
   }
