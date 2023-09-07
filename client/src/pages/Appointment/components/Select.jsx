@@ -1,17 +1,32 @@
-import { useId } from "react"
+import { useId, useRef } from "react"
+import { useErrorHandling } from "../hooks/useErrorHandling"
 
-export function Select({ label, name, options }) {
+export function Select({ label, defaultValue, name, options, error }) {
   const id = useId()
+  const selectRef = useRef()
+  const { showError, showErrorPopup, handleChange, handleBlur, handleFocus } =
+    useErrorHandling(error, selectRef)
 
   return (
     <tr>
       <td>
-        <label htmlFor={id}>{label}</label>
+        <label htmlFor={id} className={showError ? "error" : undefined}>
+          {label}
+        </label>
       </td>
       <td>
-        <select id={id} name={name} defaultValue="0">
+        <select
+          id={id}
+          name={name}
+          defaultValue="0"
+          ref={selectRef}
+          className={`input-field ${showError ? "error" : ""}`}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+        >
           <option value="0" disabled hidden>
-            Select a Make
+            {defaultValue}
           </option>
           {options.map(option => (
             <option
@@ -22,6 +37,9 @@ export function Select({ label, name, options }) {
             </option>
           ))}
         </select>
+        {showError && showErrorPopup && (
+          <div className="error-tip">{error}</div>
+        )}
       </td>
     </tr>
   )

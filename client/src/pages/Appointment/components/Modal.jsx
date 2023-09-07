@@ -21,7 +21,7 @@ export function Modal({ success }) {
   }
 
   return createPortal(
-    <dialog ref={modalRef} onClick={handleClick}>
+    <dialog className="modal" ref={modalRef} onClick={handleClick}>
       <p>
         {success
           ? "Request Submitted Successfully"

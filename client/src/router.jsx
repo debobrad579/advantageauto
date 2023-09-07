@@ -1,4 +1,4 @@
-import { Navigate, createBrowserRouter, redirect } from "react-router-dom"
+import { Navigate, createBrowserRouter } from "react-router-dom"
 import { Home } from "pages/Home/Home"
 import { WhoWeAre } from "pages/WhoWeAre/WhoWeAre"
 import { Staff } from "pages/Staff/Staff"
@@ -40,16 +40,21 @@ export const router = createBrowserRouter([
           const time = formData.get("time")
           const additional = formData.get("additional")
 
-          if (name === "") return { name: "Required" }
-          if (phone === "") return { phone: "Required" }
-          if (email === "") return { email: "Required" }
-          if (year === "") return { year: "Required" }
-          if (make === "0") return { make: "Required" }
-          if (model === "") return { model: "Required" }
-          if (service1 + service2 + service3 === "000")
-            return { service: "At least 1 is required" }
-          if (date === "") return { date: "Required" }
-          if (time === "") return { time: "Required" }
+          if (name === "") return { name: "Please enter a name." }
+          if (phone === "") return { phone: "Please enter a phone number." }
+          if (email === "") return { email: "Please enter an email address." }
+          if (
+            !email.match(
+              /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            )
+          )
+            return { email: "Please enter a valid email address. " }
+          if (year === "") return { year: "Please enter a year." }
+          if (make == null) return { make: "Please select a make." }
+          if (model === "") return { model: "Please enter a model." }
+          if (service1 == null && service2 == null && service3 == null)
+            return { service: "Please select at least 1 service." }
+          if (date === "") return { date: "Please select a date." }
 
           const [selectedYear, selectedMonth, selectedDay] = date
             .split("-")
@@ -66,13 +71,15 @@ export const router = createBrowserRouter([
           if ([0, 1].includes(dayOfWeek))
             return { date: "Please select a weekday." }
 
+          if (time === "") return { time: "Please select a time." }
+
           const numericTime =
             Number(time.slice(0, 2)) + Number(time.slice(3, 5)) / 60
 
           if (dayOfWeek === 6 && (numericTime < 8 || numericTime > 13.5))
             return { time: "Please select a time between 8:00 AM and 1:30 PM." }
           if (numericTime < 8 || numericTime > 17)
-            return { time: "Please select a time between 8:00 AM and 5 PM." }
+            return { time: "Please select a time between 8:00 AM and 5:00 PM." }
 
           const response = await fetch("http://127.0.0.1:5000/api", {
             method: "POST",
