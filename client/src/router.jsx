@@ -82,7 +82,7 @@ export const router = createBrowserRouter([
             return { time: "Please select a time between 8:00 AM and 5:00 PM." }
 
           const response = await fetch(
-            "https://advantageauto.onrender.com:8000/api",
+            "https://advantage-auto-api.onrender.com/api",
             {
               method: "POST",
               signal: request.signal,
