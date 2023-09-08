@@ -51,6 +51,11 @@ export const router = createBrowserRouter([
           )
             return { email: "Please enter a valid email address. " }
           if (year === "") return { year: "Please enter a year." }
+          if (!/^-?\d+$/.test(year)) return { year: "Please enter an integer." }
+          if (Number(year) < 1900)
+            return { year: "Please enter a year after 1900." }
+          if (Number(year) > new Date().getFullYear())
+            return { year: "Please enter a year in the past." }
           if (make == null) return { make: "Please select a make." }
           if (model === "") return { model: "Please enter a model." }
           if (service1 == null && service2 == null && service3 == null)
