@@ -7,6 +7,7 @@ import { UsedCar } from "pages/UsedCar/UsedCar"
 import { VehiclesToAvoid } from "pages/VehiclesToAvoid/VehiclesToAvoid"
 import { Appointment } from "pages/Appointment/Appointment"
 import { Layout } from "pages/layout/Layout"
+import emailjs from "@emailjs/browser"
 
 export const router = createBrowserRouter([
   {
@@ -81,32 +82,31 @@ export const router = createBrowserRouter([
           if (numericTime < 8 || numericTime > 17)
             return { time: "Please select a time between 8:00 AM and 5:00 PM." }
 
-          const response = await fetch(
-            "https://advantage-auto-api.onrender.com/api",
-            {
-              method: "POST",
-              signal: request.signal,
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
+          return await emailjs
+            .send(
+              "service_ernk545",
+              "template_n738fta",
+              {
                 name,
                 phone,
                 email,
                 year,
                 make,
                 model,
-                service1,
-                service2,
-                service3,
+                services: [service1, service2, service3]
+                  .filter(i => i !== null)
+                  .map(i => i.replace("+", " "))
+                  .join(", "),
                 date,
                 time,
                 additional,
-              }),
-            }
-          ).then(res => res.json())
-
-          return { success: response.success }
+              },
+              "z9wM1wbI41kkRotot"
+            )
+            .then(
+              () => ({ success: true }),
+              () => ({ success: false })
+            )
         },
       },
     ],
