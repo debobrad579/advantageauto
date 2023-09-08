@@ -10,7 +10,6 @@ import { MAKES, SERVICES } from "./constants"
 export function Appointment() {
   const error = useActionData()
   const { state } = useNavigation()
-  const isSubmitting = state === "submitting"
 
   return (
     <>
@@ -89,10 +88,10 @@ export function Appointment() {
         <div className="form-buttons">
           <input
             type="submit"
-            value={isSubmitting ? "Submitting..." : "Submit"}
-            disabled={isSubmitting}
+            value={state === "submitting" ? "Submitting..." : "Submit"}
+            disabled={state === "submitting"}
           />
-          <input type="reset" value="Reset" disabled={isSubmitting} />
+          <input type="reset" value="Reset" disabled={state === "submitting"} />
         </div>
       </Form>
       <Modal success={error?.success} />
