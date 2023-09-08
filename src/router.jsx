@@ -91,14 +91,11 @@ export const router = createBrowserRouter([
                 phone,
                 email,
                 year,
-                make,
+                make: make.replace("+", " "),
                 model,
-                services: [service1, service2, service3]
-                  .filter(i => i !== null)
-                  .map(i => i.replace("+", " "))
-                  .join(", "),
-                date,
-                time,
+                services: formatServices(service1, service2, service3),
+                date: formatDate(date),
+                time: formatTime(time),
                 additional,
               },
               "z9wM1wbI41kkRotot"
@@ -112,3 +109,44 @@ export const router = createBrowserRouter([
     ],
   },
 ])
+
+function formatServices(service1, service2, service3) {
+  return [service1, service2, service3]
+    .filter(i => i !== null)
+    .map(i => i.replace("+", " "))
+    .join(", ")
+}
+
+function formatDate(date) {
+  try {
+    const [year, month, day] = date.split("-").map(Number)
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ]
+    return `${monthNames[month - 1]} ${day}, ${year}`
+  } catch (error) {
+    return date
+  }
+}
+
+function formatTime(time) {
+  try {
+    const [hour, minute] = time.split(":").map(Number)
+    return `${hour % 12 !== 0 ? hour % 12 : 12}:${minute
+      .toString()
+      .padStart(2, "0")} ${hour < 12 ? "AM" : "PM"}`
+  } catch (error) {
+    return time
+  }
+}
