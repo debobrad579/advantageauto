@@ -66,4 +66,19 @@ export const MAKES = [
   "Volvo",
 ]
 
-export const SERVICES = ["Test Service", "2", "3", "4"]
+export const SERVICES = [
+  "Brakes",
+  "Suspension",
+  "Alignment",
+  "Exhaust",
+  "Air Conditioning for R134a and R1234",
+  "Tire sales, repairs and Road Force balancing",
+  "TPMS sensors and programming",
+  "Diagnostics",
+  "Electrical",
+  "Emissions",
+  "Hybrid car service",
+  "Engine and transmission replacement",
+  "Pre-purchase inspection",
+  "Dripless undercoating",
+]
