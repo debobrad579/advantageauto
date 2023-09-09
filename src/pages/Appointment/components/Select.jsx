@@ -8,13 +8,11 @@ export function Select({ label, defaultValue, name, options, error }) {
     useErrorHandling(error, selectRef)
 
   return (
-    <tr>
-      <td>
-        <label htmlFor={id} className={showError ? "error" : undefined}>
-          {label}
-        </label>
-      </td>
-      <td>
+    <>
+      <label htmlFor={id} className={showError ? "error" : undefined}>
+        {label}
+      </label>
+      <div>
         <select
           id={id}
           name={name}
@@ -40,7 +38,7 @@ export function Select({ label, defaultValue, name, options, error }) {
         {showError && showErrorPopup && (
           <div className="error-popup">{error}</div>
         )}
-      </td>
-    </tr>
+      </div>
+    </>
   )
 }

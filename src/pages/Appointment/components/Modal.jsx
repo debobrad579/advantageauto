@@ -1,14 +1,14 @@
 import { useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
 
-export function Modal({ success }) {
+export function Modal({ error }) {
   const modalRef = useRef(null)
 
   useEffect(() => {
-    if (success != null) modalRef.current.showModal()
-  }, [success])
+    if (error?.success != null) modalRef.current.showModal()
+  }, [error])
 
-  const handleClick = e => {
+  function handleClick(e) {
     const modalDimentions = modalRef.current.getBoundingClientRect()
 
     if (
@@ -23,7 +23,7 @@ export function Modal({ success }) {
   return createPortal(
     <dialog className="modal" ref={modalRef} onClick={handleClick}>
       <p>
-        {success
+        {error?.success
           ? "Request Submitted Successfully"
           : "Request Submission Failed"}
       </p>

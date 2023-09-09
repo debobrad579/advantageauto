@@ -14,13 +14,11 @@ export function Input({ label, name, type = "text", error }) {
   } = useErrorHandling(error, inputRef)
 
   return (
-    <tr>
-      <td>
-        <label htmlFor={id} className={showError ? "error" : undefined}>
-          {label}
-        </label>
-      </td>
-      <td>
+    <>
+      <label htmlFor={id} className={showError ? "error" : undefined}>
+        {label}
+      </label>
+      <div>
         <input
           id={id}
           name={name}
@@ -35,7 +33,7 @@ export function Input({ label, name, type = "text", error }) {
         {showError && showErrorPopup && (
           <div className="error-popup">{error}</div>
         )}
-      </td>
-    </tr>
+      </div>
+    </>
   )
 }

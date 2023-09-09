@@ -13,6 +13,7 @@
 
 .textarea {
   height: 141px;
+  width: 100%;
   resize: none;
 }
 
@@ -64,31 +65,21 @@ label.error {
 }
 
 .form-buttons {
-  text-align: center;
-}
-
-.form-buttons > input {
-  width: 375px;
+  justify-content: center;
+  display: grid;
+  grid-column-gap: 5px;
+  grid-template-columns: 370px 370px;
+  margin-top: 16px;
 }
 
 @media (max-width: 830px) {
   .form-buttons {
-    display: grid;
-    grid-column-gap: 5px;
-    grid-template-columns: auto auto;
+    grid-template-columns: 0.5fr 0.5fr;
   }
 
   .form-buttons > input {
     width: 100%;
   }
-}
-
-table {
-  width: 100%;
-}
-
-td:first-child {
-  width: 175px;
 }
 
 .modal {
@@ -105,4 +96,10 @@ td:first-child {
 
 .modal-overlay.show {
   display: block;
+}
+
+.form-grid {
+  display: grid;
+  grid-row-gap: 4px;
+  grid-template-columns: 175px auto;
 }
