@@ -4,14 +4,8 @@ import { useErrorHandling } from "../hooks/useErrorHandling"
 export function Input({ label, name, type = "text", error }) {
   const id = useId()
   const inputRef = useRef(null)
-  const {
-    showError,
-    showErrorPopup,
-    handleChange,
-    handleKeyDown,
-    handleBlur,
-    handleFocus,
-  } = useErrorHandling(error, inputRef)
+  const { showError, showErrorPopup, handleChange, handleBlur, handleFocus } =
+    useErrorHandling(error, inputRef)
 
   return (
     <>
@@ -26,7 +20,6 @@ export function Input({ label, name, type = "text", error }) {
           ref={inputRef}
           className={`input-field ${showError ? "error" : ""}`}
           onChange={handleChange}
-          onKeyDown={handleKeyDown}
           onBlur={handleBlur}
           onFocus={handleFocus}
         />

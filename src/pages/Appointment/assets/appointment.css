@@ -35,14 +35,14 @@ label.error {
 
 .error-popup {
   background-color: hsl(0, 80%, 94%);
-  border: 1px solid hsl(359, 91%, 87%);
+  border: 1px solid hsl(358, 100%, 70%);
   border-radius: 7px;
   -moz-border-radius: 7px;
   -webkit-border-radius: 7px;
   color: hsl(345, 100%, 40%);
   font-weight: bold;
   padding: 7px 11px 4px;
-  margin-top: 10px;
+  margin-top: 8px;
   position: absolute;
 }
 
@@ -60,7 +60,7 @@ label.error {
 }
 
 .error-popup:before {
-  border-bottom: 7px solid hsl(359, 91%, 87%);
+  border-bottom: 7px solid hsl(358, 100%, 70%);
   top: -14px;
 }
 

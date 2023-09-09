@@ -19,16 +19,6 @@ export function useErrorHandling(error, ref) {
     setShowError(false)
   }
 
-  function handleKeyDown(e) {
-    if (
-      ref.current.type === "number" &&
-      e.key.length === 1 &&
-      /\D/.test(e.key)
-    ) {
-      e.preventDefault()
-    }
-  }
-
   function handleBlur() {
     setShowErrorPopup(false)
   }
@@ -41,7 +31,6 @@ export function useErrorHandling(error, ref) {
     showError,
     showErrorPopup,
     handleChange,
-    handleKeyDown,
     handleBlur,
     handleFocus,
   }
