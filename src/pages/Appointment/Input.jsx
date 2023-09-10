@@ -1,5 +1,5 @@
 import { useId, useRef } from "react"
-import { useErrorHandling } from "../hooks/useErrorHandling"
+import { useErrorHandling } from "./useErrorHandling"
 
 export function Input({ label, name, type = "text", error }) {
   const id = useId()

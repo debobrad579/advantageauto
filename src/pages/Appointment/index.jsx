@@ -1,8 +1,8 @@
 import "./assets/appointment.css"
 import { Form, useActionData, useNavigation } from "react-router-dom"
-import { Select } from "./components/Select"
-import { Input } from "./components/Input"
-import { Modal } from "./components/Modal"
+import { Select } from "./Select"
+import { Input } from "./Input"
+import { Modal } from "./Modal"
 import { MAKES, SERVICES } from "./constants"
 
 export function Appointment() {

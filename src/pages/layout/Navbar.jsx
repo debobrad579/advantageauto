@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
-import logo from "../assets/logo.png"
+import logo from "./assets/logo.png"
 
 export function Navbar() {
   const [dropdown, setDropdown] = useState()

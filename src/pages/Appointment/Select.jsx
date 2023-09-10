@@ -1,5 +1,5 @@
 import { useId, useRef } from "react"
-import { useErrorHandling } from "../hooks/useErrorHandling"
+import { useErrorHandling } from "./useErrorHandling"
 
 export function Select({ label, defaultValue, name, options, error }) {
   const id = useId()

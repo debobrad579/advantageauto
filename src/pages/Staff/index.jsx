@@ -3,7 +3,7 @@ import stuart from "./assets/stuart.jpg"
 import ryan from "./assets/ryan.jpg"
 import william from "./assets/william.jpg"
 import cody from "./assets/cody.jpg"
-import { Member } from "./components/Member"
+import { Member } from "./Member"
 
 export function Staff() {
   return (
