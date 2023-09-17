@@ -19,12 +19,16 @@ export function Home() {
         </ul>
         <h2>Other Information:</h2>
         <strong>Address:</strong>
-        <a href="https://goo.gl/maps/HB2616UgfmQ43Tcz6" target="_blank">
+        <a
+          href="https://goo.gl/maps/HB2616UgfmQ43Tcz6"
+          target="_blank"
+          rel="noreferrer"
+        >
           576-D Elgin Street, Brantford, ON N3S 7X2
         </a>
         <br />
         <strong>Phone:</strong>
-        <a href="tel:519-752-8629" target="_blank">
+        <a href="tel:519-752-8629" target="_blank" rel="noreferrer">
           519-752-8629
         </a>
       </div>

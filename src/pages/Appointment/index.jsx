@@ -17,18 +17,25 @@ export function Appointment() {
           <div>
             <h3>Client Information</h3>
             <div className="form-grid">
-              <Input label="Name:" name="name" error={error?.name} />
+              <Input
+                label="Name:"
+                name="name"
+                error={error?.name}
+                obj={error}
+              />
               <Input
                 label="Phone:"
                 name="phone"
                 type="tel"
                 error={error?.phone}
+                obj={error}
               />
               <Input
                 label="Email:"
                 name="email"
                 type="email"
                 error={error?.email}
+                obj={error}
               />
             </div>
           </div>
@@ -40,6 +47,7 @@ export function Appointment() {
                 name="year"
                 type="number"
                 error={error?.year}
+                obj={error}
               />
               <Select
                 label="Make:"
@@ -47,43 +55,54 @@ export function Appointment() {
                 name="make"
                 options={MAKES}
                 error={error?.make}
+                obj={error}
               />
-              <Input label="Model:" name="model" error={error?.model} />
+              <Input
+                label="Model:"
+                name="model"
+                error={error?.model}
+                obj={error}
+              />
             </div>
           </div>
           <div>
             <h3>Service Information</h3>
             <div className="form-grid">
               <Select
-                label="Requested Service:"
+                label="Requested Services:"
                 defaultValue="Select a Service"
                 name="service1"
                 options={SERVICES}
-                error={error?.service}
+                error={error?.services}
+                obj={error}
               />
               <Select
                 label=""
                 defaultValue="Select a Service"
                 name="service2"
                 options={SERVICES}
+                obj={error}
               />
               <Select
                 label=""
                 defaultValue="Select a Service"
                 name="service3"
                 options={SERVICES}
+                obj={error}
               />
               <Input
                 label="Requested Date:"
                 name="date"
                 type="date"
                 error={error?.date}
+                obj={error}
               />
               <Input
                 label="Requested Time:"
                 name="time"
                 type="time"
                 error={error?.time}
+                obj={error}
               />
             </div>
           </div>

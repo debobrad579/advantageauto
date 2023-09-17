@@ -2,74 +2,152 @@ import emailjs from "@emailjs/browser"
 
 export async function handleSubmit({ request }) {
   const data = Object.fromEntries(await request.formData())
-  const error = checkErrors(data)
-  return (
-    error ||
-    (await emailjs
-      .send(
-        "service_ernk545",
-        "template_n738fta",
-        {
-          name: data.name,
-          phone: data.phone,
-          email: data.email,
-          year: data.year,
-          make: data.make.replace("+", " "),
-          model: data.model,
-          services: formatServices(data.service1, data.service2, data.service3),
-          date: formatDate(data.date),
-          time: formatTime(data.time),
-          additional: data.additional,
-        },
-        "z9wM1wbI41kkRotot"
-      )
-      .then(
-        () => ({ success: true }),
-        () => ({ success: false })
-      ))
-  )
+  data.services = [data.service1, data.service2, data.service3]
+  const errors = getPossibleErrors()
+  for (const key in errors) {
+    for (let i = 0; i < errors[key].length; i++) {
+      if (errors[key][i].conditional(data[key]))
+        return { [key]: errors[key][i].message }
+    }
+  }
+  if (process.env.NODE_ENV !== "production") return { success: true }
+  return await emailjs
+    .send(
+      "service_ernk545",
+      "template_n738fta",
+      {
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        year: data.year,
+        make: data.make.replace("+", " "),
+        model: data.model,
+        services: formatServices(
+          data.services[0],
+          data.services[1],
+          data.services[2]
+        ),
+        date: formatDate(data.date),
+        time: formatTime(data.time),
+        additional: data.additional,
+      },
+      "z9wM1wbI41kkRotot"
+    )
+    .then(
+      () => ({ success: true }),
+      () => ({ success: false })
+    )
 }
 
-function checkErrors(data) {
-  if (data.name === "") return { name: "Please enter a name." }
-  if (data.phone === "") return { phone: "Please enter a phone number." }
-  if (data.email === "") return { email: "Please enter an email address." }
-  if (
-    !data.email.match(
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    )
-  )
-    return { email: "Please enter a valid email address. " }
-  if (data.year === "") return { year: "Please enter a year." }
-  if (!/^-?\d+$/.test(data.year)) return { year: "Please enter an integer." }
-  if (Number(data.year) < 1900)
-    return { year: "Please enter a year after 1900." }
-  if (Number(data.year) > new Date().getFullYear())
-    return { year: "Please enter a year in the past." }
-  if (data.make == null) return { make: "Please select a make." }
-  if (data.model === "") return { model: "Please enter a model." }
-  if (data.service1 == null && data.service2 == null && data.service3 == null)
-    return { service: "Please select at least 1 service." }
-  if (data.date === "") return { date: "Please select a date." }
-  const [selectedYear, selectedMonth, selectedDay] = data.date
-    .split("-")
-    .map(Number)
-  const dayOfWeek =
-    (selectedDay +
-      Math.floor((13 * (selectedMonth + 1)) / 5) +
-      selectedYear +
-      Math.floor(selectedYear / 4) -
-      Math.floor(selectedYear / 100) +
-      Math.floor(selectedYear / 400)) %
-    7
-  if ([0, 1].includes(dayOfWeek)) return { date: "Please select a weekday." }
-  if (data.time === "") return { time: "Please select a time." }
-  const numericTime =
-    Number(data.time.slice(0, 2)) + Number(data.time.slice(3, 5)) / 60
-  if (dayOfWeek === 6 && (numericTime < 8 || numericTime > 13.5))
-    return { time: "Please select a time between 8:00 AM and 1:30 PM." }
-  if (numericTime < 8 || numericTime > 17)
-    return { time: "Please select a time between 8:00 AM and 5:00 PM." }
+function getPossibleErrors() {
+  let dayOfWeek
+  let numericTime
+
+  return {
+    name: [
+      {
+        message: "Please enter a name.",
+        conditional: name => name === "",
+      },
+    ],
+    phone: [
+      {
+        message: "Please enter a phone number.",
+        conditional: phone => phone === "",
+      },
+    ],
+    email: [
+      {
+        message: "Please enter an email address.",
+        conditional: email => email === "",
+      },
+      {
+        message: "Please enter a valid email address.",
+        conditional: email =>
+          !email.match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          ),
+      },
+    ],
+    year: [
+      {
+        message: "Please enter a year.",
+        conditional: year => year === "",
+      },
+      {
+        message: "Please enter a numeric year.",
+        conditional: year => !/^-?\d+$/.test(year),
+      },
+      {
+        message: "Please enter a year after 1900.",
+        conditional: year => parseInt(year) < 1900,
+      },
+      {
+        message: "Please enter a year in the past.",
+        conditional: year => parseInt(year) > new Date().getFullYear(),
+      },
+    ],
+    make: [
+      {
+        message: "Please select a make.",
+        conditional: make => make == null || make === "0",
+      },
+    ],
+    model: [
+      {
+        message: "Please enter a model.",
+        conditional: model => model === "",
+      },
+    ],
+    services: [
+      {
+        message: "Please select at least one service.",
+        conditional: services =>
+          services.filter(service => service != null && service != "0")
+            .length === 0,
+      },
+    ],
+    date: [
+      {
+        message: "Please select a date.",
+        conditional: date => date === "",
+      },
+      {
+        message: "Please select a weekday.",
+        conditional: date => {
+          const [selectedYear, selectedMonth, selectedDay] = date
+            .split("-")
+            .map(Number)
+          dayOfWeek =
+            (selectedDay +
+              Math.floor((13 * (selectedMonth + 1)) / 5) +
+              selectedYear +
+              Math.floor(selectedYear / 4) -
+              Math.floor(selectedYear / 100) +
+              Math.floor(selectedYear / 400)) %
+            7
+          return [0, 1].includes(dayOfWeek)
+        },
+      },
+    ],
+    time: [
+      {
+        message: "Please select a time.",
+        conditional: time => time === "",
+      },
+      {
+        message: "Please select a time between 8:00 AM and 1:30 PM.",
+        conditional: time => {
+          numericTime = Number(time.slice(0, 2)) + Number(time.slice(3, 5)) / 60
+          return dayOfWeek === 6 && (numericTime < 8 || numericTime > 13.5)
+        },
+      },
+      {
+        message: "Please select a time between 8:00 AM and 5:00 PM.",
+        conditional: () => numericTime < 8 || numericTime > 17,
+      },
+    ],
+  }
 }
 
 function formatServices(service1, service2, service3) {

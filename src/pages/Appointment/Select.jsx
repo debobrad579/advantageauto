@@ -1,11 +1,11 @@
 import { useId, useRef } from "react"
 import { useErrorHandling } from "./useErrorHandling"
 
-export function Select({ label, defaultValue, name, options, error }) {
+export function Select({ label, defaultValue, name, options, error, obj }) {
   const id = useId()
   const selectRef = useRef()
   const { showError, showErrorPopup, handleChange, handleBlur, handleFocus } =
-    useErrorHandling(error, selectRef)
+    useErrorHandling(error, obj, selectRef)
 
   return (
     <>

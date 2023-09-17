@@ -1,4 +1,4 @@
-import { Navigate, createBrowserRouter } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import { Home } from "pages/Home/index"
 import { WhoWeAre } from "pages/WhoWeAre/index"
 import { Staff } from "pages/Staff/index"
@@ -9,7 +9,7 @@ import { Appointment } from "pages/Appointment/index"
 import { Layout } from "pages/layout/index"
 import { handleSubmit } from "pages/Appointment/handleSubmit"
 
-export const router = createBrowserRouter([
+export const routes = [
   {
     path: "/",
     element: <Layout />,
@@ -29,4 +29,4 @@ export const router = createBrowserRouter([
       },
     ],
   },
-])
+]

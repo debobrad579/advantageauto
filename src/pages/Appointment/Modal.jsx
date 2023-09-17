@@ -5,7 +5,9 @@ export function Modal({ error }) {
   const modalRef = useRef(null)
 
   useEffect(() => {
-    if (error?.success != null) modalRef.current.showModal()
+    if (error?.success != null && process.env.NODE_ENV !== "test") {
+      modalRef.current.showModal()
+    }
   }, [error])
 
   function handleClick(e) {

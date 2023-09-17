@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export function useErrorHandling(error, ref) {
+export function useErrorHandling(error, obj, ref) {
   const [showError, setShowError] = useState(false)
   const [showErrorPopup, setShowErrorPopup] = useState(false)
 
@@ -13,7 +13,7 @@ export function useErrorHandling(error, ref) {
     return () => {
       setShowError(false)
     }
-  }, [error])
+  }, [error, obj, ref])
 
   function handleChange() {
     setShowError(false)

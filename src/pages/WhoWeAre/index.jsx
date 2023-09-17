@@ -33,7 +33,7 @@ export function WhoWeAre() {
       </p>
       <p>
         We are proud to allow{" "}
-        <a href="https://organizedkaos.org/" target="_blank">
+        <a href="https://organizedkaos.org/" target="_blank" rel="noreferrer">
           Organized Kaos
         </a>{" "}
         to use our facility for hands on trade experience for youth. There is an

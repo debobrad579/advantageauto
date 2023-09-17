@@ -1,9 +1,7 @@
 export function Member({ image, alt, children }) {
   return (
     <>
-      <div>
-        <img className="photo" src={image} alt={alt} />
-      </div>
+      <img className="photo" src={image} alt={alt} />
       <p>{children}</p>
     </>
   )

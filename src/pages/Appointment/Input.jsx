@@ -1,11 +1,11 @@
 import { useId, useRef } from "react"
 import { useErrorHandling } from "./useErrorHandling"
 
-export function Input({ label, name, type = "text", error }) {
+export function Input({ label, name, type = "text", error, obj }) {
   const id = useId()
   const inputRef = useRef(null)
   const { showError, showErrorPopup, handleChange, handleBlur, handleFocus } =
-    useErrorHandling(error, inputRef)
+    useErrorHandling(error, obj, inputRef)
 
   return (
     <>
