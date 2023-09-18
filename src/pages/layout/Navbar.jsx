@@ -26,43 +26,37 @@ export function Navbar() {
 
   return (
     <nav className={dropdown == null ? undefined : dropdown ? "down" : "up"}>
-      <div>
-        <NavLink id="navbar-logo" to="/home">
-          <img id="navbar-logo-image" src={logo} />
-        </NavLink>
-        <div
-          id="navbar-toggle"
-          className={dropdown ? "active" : undefined}
-          onClick={() => setDropdown(currentDropdown => !currentDropdown)}
-        >
-          <span />
-          <span />
-          <span />
-        </div>
-        <ul
-          id="navbar-links"
-          className={dropdown == null ? "initial" : dropdown ? "down" : "up"}
-        >
-          <li>
-            <NavLink to="who-we-are">Who We Are</NavLink>
-          </li>
-          <li>
-            <NavLink to="staff">Staff</NavLink>
-          </li>
-          <li>
-            <NavLink to="services-offered">Services Offered</NavLink>
-          </li>
-          <li>
-            <NavLink to="buying-a-used-car">Buying a Used Car?</NavLink>
-          </li>
-          <li>
-            <NavLink to="vehicles-to-avoid">Vehicles to Avoid</NavLink>
-          </li>
-          <li>
-            <NavLink to="appointment-request">Appointment Request</NavLink>
-          </li>
-        </ul>
+      <NavLink to="/home">
+        <img src={logo} />
+      </NavLink>
+      <div
+        className={dropdown ? "active" : undefined}
+        onClick={() => setDropdown(currentDropdown => !currentDropdown)}
+      >
+        <span />
+        <span />
+        <span />
       </div>
+      <ul className={dropdown == null ? "initial" : dropdown ? "down" : "up"}>
+        <li>
+          <NavLink to="who-we-are">Who We Are</NavLink>
+        </li>
+        <li>
+          <NavLink to="staff">Staff</NavLink>
+        </li>
+        <li>
+          <NavLink to="services-offered">Services Offered</NavLink>
+        </li>
+        <li>
+          <NavLink to="buying-a-used-car">Buying a Used Car?</NavLink>
+        </li>
+        <li>
+          <NavLink to="vehicles-to-avoid">Vehicles to Avoid</NavLink>
+        </li>
+        <li>
+          <NavLink to="appointment-request">Appointment Request</NavLink>
+        </li>
+      </ul>
     </nav>
   )
 }

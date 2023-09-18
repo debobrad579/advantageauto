@@ -1,19 +1,7 @@
-.button {
-  outline: none;
-  background-color: var(--light-grey);
-  border: 1px solid var(--grey);
-}
-
-.button:hover {
-  background-color: hsl(0, 0%, 80%);
-}
-
-.button:active {
-  background-color: hsl(0, 0%, 70%);
-}
-
-.button:focus {
-  box-shadow: 0 0 3px 0 black;
+.form-group {
+  display: grid;
+  grid-row-gap: 4px;
+  grid-template-columns: 100px auto;
 }
 
 .input-field {
@@ -96,6 +84,30 @@ label.error {
   }
 }
 
+.button {
+  outline: none;
+  background-color: var(--light-grey);
+  border: 1px solid var(--grey);
+}
+
+.button:hover {
+  background-color: hsl(0, 0%, 80%);
+}
+
+.button:active {
+  background-color: hsl(0, 0%, 70%);
+}
+
+.button:focus {
+  outline: 1px solid var(--dark-grey);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .modal {
   position: fixed;
   top: 50%;
@@ -104,17 +116,4 @@ label.error {
   padding: 1rem;
   background-color: white;
   border: 1px solid var(--dark-grey);
-}
-
-.modal-overlay {
-  display: block;
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.form-grid {
-  display: grid;
-  grid-row-gap: 4px;
-  grid-template-columns: 100px auto;
 }

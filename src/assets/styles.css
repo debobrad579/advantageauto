@@ -16,10 +16,6 @@ body {
   height: 100%;
 }
 
-#content {
-  padding: 6rem var(--side-padding);
-}
-
 a {
   color: hsl(216, 98%, 52%);
   text-decoration: none;
@@ -29,7 +25,7 @@ a:hover {
   color: hsl(216, 91%, 42%);
 }
 
-ul:not(#navbar-links) > li {
+ul > li {
   margin-bottom: 8px;
 }
 
@@ -61,5 +57,9 @@ ul:not(#navbar-links) > li {
   .grid-container,
   .grid-container-4 {
     grid-template-columns: 1fr;
+  }
+
+  :root {
+    --side-padding: 20px;
   }
 }

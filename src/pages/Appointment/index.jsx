@@ -16,7 +16,7 @@ export function Appointment() {
         <div className="grid-container">
           <div>
             <h3>Client Information</h3>
-            <div className="form-grid">
+            <div className="form-group">
               <Input
                 label="Name:"
                 name="name"
@@ -41,7 +41,7 @@ export function Appointment() {
           </div>
           <div>
             <h3>Vehicle Information</h3>
-            <div className="form-grid">
+            <div className="form-group">
               <Input
                 label="Year:"
                 name="year"
@@ -67,7 +67,7 @@ export function Appointment() {
           </div>
           <div>
             <h3>Service Information</h3>
-            <div className="form-grid">
+            <div className="form-group">
               <Select
                 label="Services:"
                 defaultValue="Select a Service"

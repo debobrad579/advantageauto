@@ -1,62 +1,21 @@
 nav {
   position: fixed;
   top: 0;
-  height: 5.6rem;
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   background-color: var(--dark-grey);
-  padding: 0 var(--side-padding);
+  padding: 0.5rem var(--side-padding);
+  height: 6.2rem;
 }
 
-nav > div {
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-}
-
-#navbar-logo {
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
-  margin-right: 1rem;
-}
-
-#navbar-logo-image {
+nav img {
   height: 64px;
 }
 
-#navbar-links {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-}
-
-#navbar-links li a {
-  display: block;
-  text-decoration: none;
-  transition: color 0.15s ease-in-out;
-  padding: 0.5rem;
-  color: var(--grey);
-}
-
-#navbar-links li a:hover {
-  color: var(--light-grey);
-}
-
-#navbar-links li a.active {
-  color: white;
-}
-
-#navbar-toggle {
-  position: fixed;
-  top: 2.4rem;
-  right: var(--side-padding);
+nav > div {
   display: none;
   flex-direction: column;
   justify-content: space-between;
@@ -64,7 +23,7 @@ nav > div {
   height: 21px;
 }
 
-#navbar-toggle span {
+nav > div > span {
   height: 3px;
   width: 100%;
   transition: background-color 0.15s ease-in-out;
@@ -72,24 +31,41 @@ nav > div {
   border-radius: 10px;
 }
 
-#navbar-toggle:hover span {
+nav > div:hover > span {
   background-color: var(--light-grey);
 }
 
-#navbar-toggle.active span {
+nav > div.active > span {
   background-color: white;
 }
 
+nav > ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+
+nav > ul > li {
+  margin-bottom: 0;
+}
+
+nav a {
+  display: block;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out;
+  padding: 0.5rem;
+  color: var(--grey);
+}
+
+nav a:hover {
+  color: var(--light-grey);
+}
+
+nav a.active {
+  color: white;
+}
+
 @media (max-width: 1200px) {
-  :root {
-    --side-padding: 20px;
-  }
-
-  nav {
-    flex-wrap: nowrap;
-    align-items: flex-start;
-  }
-
   nav.down {
     animation: height-down 0.5s ease-in-out forwards;
   }
@@ -98,32 +74,28 @@ nav > div {
     animation: height-up 0.5s ease-in-out forwards;
   }
 
-  #navbar-toggle {
+  nav > div {
     display: flex;
   }
 
-  #navbar-links {
+  nav > ul {
     flex-direction: column;
+    align-items: center;
     width: 100%;
     padding: 0;
   }
 
-  #navbar-links.down {
-    animation: move-down 0.5s ease-in-out forwards;
-  }
-
-  #navbar-links.up {
-    animation: move-up 0.5s ease-in-out forwards;
-  }
-
-  #navbar-links.initial {
+  nav > ul.initial {
     transform: translateY(-320px);
     display: none;
   }
 
-  #navbar-links li {
-    width: 100%;
-    text-align: center;
+  nav > ul.down {
+    animation: move-down 0.5s ease-in-out forwards;
+  }
+
+  nav > ul.up {
+    animation: move-up 0.5s ease-in-out forwards;
   }
 
   @keyframes move-down {
@@ -150,31 +122,35 @@ nav > div {
 
   @keyframes height-down {
     0% {
-      height: 5.6rem;
+      height: 6.2rem;
     }
     100% {
-      height: 20rem;
+      height: 20.5rem;
     }
   }
 
   @keyframes height-up {
     0% {
-      height: 20rem;
+      height: 20.5rem;
     }
     100% {
-      height: 5.6rem;
+      height: 6.2rem;
     }
   }
+}
+
+main {
+  padding: 6rem var(--side-padding);
 }
 
 footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  color: white;
-  background-color: var(--dark-grey);
-  padding: 1.5rem;
   display: flex;
   justify-content: center;
   gap: 3rem;
+  padding: 1.5rem;
+  color: white;
+  background-color: var(--dark-grey);
 }

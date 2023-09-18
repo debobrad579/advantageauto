@@ -3,6 +3,7 @@ import emailjs from "@emailjs/browser"
 export async function handleSubmit({ request }) {
   const data = Object.fromEntries(await request.formData())
   data.services = [data.service1, data.service2, data.service3]
+
   const errors = getPossibleErrors()
   for (const key in errors) {
     for (let i = 0; i < errors[key].length; i++) {
@@ -10,6 +11,7 @@ export async function handleSubmit({ request }) {
         return { [key]: errors[key][i].message }
     }
   }
+
   if (process.env.NODE_ENV !== "production") return { success: true }
   return await emailjs
     .send(
