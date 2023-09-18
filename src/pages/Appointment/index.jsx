@@ -113,11 +113,17 @@ export function Appointment() {
         </div>
         <div className="form-buttons">
           <input
+            className="button"
             type="submit"
             value={state === "submitting" ? "Submitting..." : "Submit"}
             disabled={state === "submitting"}
           />
-          <input type="reset" value="Reset" disabled={state === "submitting"} />
+          <input
+            className="button"
+            type="reset"
+            value="Reset"
+            disabled={state === "submitting"}
+          />
         </div>
       </Form>
       <Modal error={error} />

@@ -48,13 +48,46 @@ describe("Appointment page", () => {
     )
   })
 
-  it("should submit form on valid form data", async () => {
-    await fillOutForm()
-    await submit()
+  describe("Valid form data", () => {
+    it("should submit form on valid form data", async () => {
+      await fillOutForm()
+      await submit()
 
-    expect(
-      await screen.findByText("Request Submitted Successfully")
-    ).toBeInTheDocument()
+      expect(
+        await screen.findByText("Request Submitted Successfully")
+      ).toBeInTheDocument()
+    })
+
+    describe("Success modal", () => {
+      beforeEach(async () => {
+        await fillOutForm()
+        await submit()
+      })
+      it("should autofocus on close button", async () => {
+        expect(await screen.findByText("Close")).toHaveFocus()
+      })
+
+      it("should close on close button click", async () => {
+        await user.click(await screen.findByText("Close"))
+        expect(
+          screen.queryByText("Request Submitted Successfully")
+        ).not.toBeInTheDocument()
+      })
+
+      it("should close on escape", async () => {
+        await user.keyboard("{Escape}")
+        expect(
+          screen.queryByText("Request Submitted Successfully")
+        ).not.toBeInTheDocument()
+      })
+
+      it("should close on click outside modal", async () => {
+        await user.click(document.getElementsByClassName("modal-overlay")[0])
+        expect(
+          screen.queryByText("Request Submitted Successfully")
+        ).not.toBeInTheDocument()
+      })
+    })
   })
 
   describe("Invalid form data", () => {
@@ -67,7 +100,7 @@ describe("Appointment page", () => {
     }
 
     describe("Error popup", () => {
-      it("should remove error message on input change", async () => {
+      it("should remove error on input change", async () => {
         await submit()
         await user.type(screen.getByLabelText("Name:"), "Test Name")
 
@@ -77,7 +110,7 @@ describe("Appointment page", () => {
         expect(screen.getByLabelText("Name:")).not.toHaveClass("error")
       })
 
-      it("should rerender error message on second invalid form submission", async () => {
+      it("should rerender error on second invalid form submission", async () => {
         await submit()
         await user.type(screen.getByLabelText("Name:"), "Test Name")
         await user.clear(screen.getByLabelText("Name:"))
@@ -88,7 +121,7 @@ describe("Appointment page", () => {
         )
       })
 
-      it("should remove error message on blur", async () => {
+      it("should remove error popup on blur", async () => {
         await submit()
         await user.tab()
 
@@ -135,7 +168,17 @@ describe("Appointment page", () => {
       })
 
       it("should display invalid email error on invalid email", async () => {
+        await user.type(emailInput, "test")
+        await submit()
+        await expectError(emailInput, "Please enter a valid email address.")
+
+        await user.clear(emailInput)
         await user.type(emailInput, "test@example")
+        await submit()
+        await expectError(emailInput, "Please enter a valid email address.")
+
+        await user.clear(emailInput)
+        await user.type(emailInput, "test@example.")
         await submit()
         await expectError(emailInput, "Please enter a valid email address.")
       })
@@ -240,6 +283,14 @@ describe("Appointment page", () => {
       })
 
       it("should display only open hours error on time during closed hours (Mon - Thu)", async () => {
+        await user.type(timeInput, "07:30")
+        await submit()
+        await expectError(
+          timeInput,
+          "Please select a time between 8:00 AM and 5:00 PM."
+        )
+
+        await user.clear(timeInput)
         await user.type(timeInput, "17:30")
         await submit()
         await expectError(
@@ -249,9 +300,18 @@ describe("Appointment page", () => {
       })
 
       it("should display only open hours error on time during closed hours (Fri)", async () => {
-        await user.type(timeInput, "14:00")
         await user.clear(screen.getByLabelText("Requested Date:"))
         await user.type(screen.getByLabelText("Requested Date:"), "2023-09-15")
+
+        await user.type(timeInput, "07:30")
+        await submit()
+        await expectError(
+          timeInput,
+          "Please select a time between 8:00 AM and 1:30 PM."
+        )
+
+        await user.clear(timeInput)
+        await user.type(timeInput, "14:00")
         await submit()
         await expectError(
           timeInput,

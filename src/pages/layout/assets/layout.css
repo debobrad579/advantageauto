@@ -1,16 +1,14 @@
 nav {
   position: fixed;
-  height: 5.6rem;
-  right: 0;
   top: 0;
-  left: 0;
+  height: 5.6rem;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   background-color: var(--dark-grey);
-  padding: 0.5rem var(--side-padding);
-  z-index: 10;
+  padding: 0 var(--side-padding);
 }
 
 nav > div {
@@ -27,7 +25,6 @@ nav > div {
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
   margin-right: 1rem;
-  z-index: 11;
 }
 
 #navbar-logo-image {
@@ -58,7 +55,7 @@ nav > div {
 
 #navbar-toggle {
   position: fixed;
-  top: 2.75rem;
+  top: 2.4rem;
   right: var(--side-padding);
   display: none;
   flex-direction: column;
@@ -172,23 +169,12 @@ nav > div {
 
 footer {
   position: fixed;
-  right: 0;
   bottom: 0;
-  left: 0;
-  z-index: 10;
+  width: 100%;
   color: white;
   background-color: var(--dark-grey);
-  padding: 2rem;
-  text-align: center;
-}
-
-footer > div {
-  padding: 3rem;
-  display: inline;
-}
-
-@media (max-width: 830px) {
-  footer > div {
-    padding: 5%;
-  }
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
 }

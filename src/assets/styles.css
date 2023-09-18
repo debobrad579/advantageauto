@@ -5,6 +5,10 @@
   --light-grey: hsl(0, 0%, 85%);
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -13,7 +17,7 @@ body {
 }
 
 #content {
-  padding: 7rem var(--side-padding) 6rem;
+  padding: 6rem var(--side-padding);
 }
 
 a {

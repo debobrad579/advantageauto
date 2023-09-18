@@ -41,7 +41,6 @@ export async function handleSubmit({ request }) {
 
 function getPossibleErrors() {
   let dayOfWeek
-  let numericTime
 
   return {
     name: [
@@ -138,13 +137,18 @@ function getPossibleErrors() {
       {
         message: "Please select a time between 8:00 AM and 1:30 PM.",
         conditional: time => {
-          numericTime = Number(time.slice(0, 2)) + Number(time.slice(3, 5)) / 60
+          const numericTime =
+            Number(time.slice(0, 2)) + Number(time.slice(3, 5)) / 60
           return dayOfWeek === 6 && (numericTime < 8 || numericTime > 13.5)
         },
       },
       {
         message: "Please select a time between 8:00 AM and 5:00 PM.",
-        conditional: () => numericTime < 8 || numericTime > 17,
+        conditional: time => {
+          const numericTime =
+            Number(time.slice(0, 2)) + Number(time.slice(3, 5)) / 60
+          return numericTime < 8 || numericTime > 17
+        },
       },
     ],
   }
