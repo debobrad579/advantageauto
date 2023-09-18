@@ -15,14 +15,14 @@ describe("Appointment page", () => {
       "Year:": "2000",
       "Make:": "Ford",
       "Model:": "F 150",
-      "Requested Services:": "Brakes",
-      "Requested Date:": "2023-09-14",
-      "Requested Time:": "10:30",
+      "Services:": "Brakes",
+      "Date:": "2023-09-14",
+      "Time:": "10:30",
     }
 
     for (const label of Object.keys(inputs)) {
       if (label !== excludeInput) {
-        if (label === "Make:" || label === "Requested Services:") {
+        if (label === "Make:" || label === "Services:") {
           await user.selectOptions(screen.getByLabelText(label), inputs[label])
         } else {
           await user.type(screen.getByLabelText(label), inputs[label])
@@ -240,10 +240,10 @@ describe("Appointment page", () => {
 
     describe("Invalid services", () => {
       it("should display required error on no selected services", async () => {
-        await fillOutForm("Requested Services:")
+        await fillOutForm("Services:")
         await submit()
         await expectError(
-          screen.getByLabelText("Requested Services:"),
+          screen.getByLabelText("Services:"),
           "Please select at least one service."
         )
       })
@@ -253,8 +253,8 @@ describe("Appointment page", () => {
       let dateInput
 
       beforeEach(async () => {
-        dateInput = screen.getByLabelText("Requested Date:")
-        await fillOutForm("Requested Date:")
+        dateInput = screen.getByLabelText("Date:")
+        await fillOutForm("Date:")
       })
 
       it("should display required error on blank date", async () => {
@@ -273,8 +273,8 @@ describe("Appointment page", () => {
       let timeInput
 
       beforeEach(async () => {
-        timeInput = screen.getByLabelText("Requested Time:")
-        await fillOutForm("Requested Time:")
+        timeInput = screen.getByLabelText("Time:")
+        await fillOutForm("Time:")
       })
 
       it("should display required error on blank time", async () => {
@@ -300,8 +300,8 @@ describe("Appointment page", () => {
       })
 
       it("should display only open hours error on time during closed hours (Fri)", async () => {
-        await user.clear(screen.getByLabelText("Requested Date:"))
-        await user.type(screen.getByLabelText("Requested Date:"), "2023-09-15")
+        await user.clear(screen.getByLabelText("Date:"))
+        await user.type(screen.getByLabelText("Date:"), "2023-09-15")
 
         await user.type(timeInput, "07:30")
         await submit()

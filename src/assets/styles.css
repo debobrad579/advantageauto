@@ -41,7 +41,7 @@ ul:not(#navbar-links) > li {
 .grid-container {
   display: grid;
   grid-column-gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: 1fr 1fr;
 }
 
 .grid-container-4 {
@@ -58,6 +58,7 @@ ul:not(#navbar-links) > li {
 }
 
 @media (max-width: 830px) {
+  .grid-container,
   .grid-container-4 {
     grid-template-columns: 1fr;
   }

@@ -69,7 +69,7 @@ export function Appointment() {
             <h3>Service Information</h3>
             <div className="form-grid">
               <Select
-                label="Requested Services:"
+                label="Services:"
                 defaultValue="Select a Service"
                 name="service1"
                 options={SERVICES}
@@ -91,14 +91,14 @@ export function Appointment() {
                 obj={error}
               />
               <Input
-                label="Requested Date:"
+                label="Date:"
                 name="date"
                 type="date"
                 error={error?.date}
                 obj={error}
               />
               <Input
-                label="Requested Time:"
+                label="Time:"
                 name="time"
                 type="time"
                 error={error?.time}

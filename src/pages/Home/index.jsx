@@ -18,7 +18,7 @@ export function Home() {
           <li>Saturday: Closed</li>
         </ul>
         <h2>Other Information:</h2>
-        <strong>Address:</strong>
+        <strong>Address: </strong>
         <a
           href="https://goo.gl/maps/HB2616UgfmQ43Tcz6"
           target="_blank"
@@ -27,7 +27,7 @@ export function Home() {
           576-D Elgin Street, Brantford, ON N3S 7X2
         </a>
         <br />
-        <strong>Phone:</strong>
+        <strong>Phone: </strong>
         <a href="tel:519-752-8629" target="_blank" rel="noreferrer">
           519-752-8629
         </a>
