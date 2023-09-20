@@ -23,7 +23,8 @@ export function Navbar() {
   }, [])
 
   useEffect(() => {
-    setDropdown(false)
+    if (window.innerWidth > 1200) setDropdown(undefined)
+    else setDropdown(false)
   }, [location])
 
   return (
