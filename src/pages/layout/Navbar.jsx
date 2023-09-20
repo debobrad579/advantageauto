@@ -10,6 +10,8 @@ export function Navbar() {
     const handleResize = () => {
       if (window.innerWidth > 1200) {
         setDropdown(undefined)
+      } else {
+        setDropdown(false)
       }
     }
 
@@ -21,7 +23,7 @@ export function Navbar() {
   }, [])
 
   useEffect(() => {
-    setDropdown(undefined)
+    setDropdown(false)
   }, [location])
 
   return (
@@ -29,15 +31,13 @@ export function Navbar() {
       <NavLink to="/home">
         <img src={logo} />
       </NavLink>
-      <div
+      <label
         className={dropdown ? "active" : undefined}
-        onClick={() => setDropdown(currentDropdown => !currentDropdown)}
+        onClick={() => setDropdown(prevDropdown => !prevDropdown)}
       >
         <span />
-        <span />
-        <span />
-      </div>
-      <ul className={dropdown == null ? "initial" : dropdown ? "down" : "up"}>
+      </label>
+      <ul className={dropdown == null ? "initial" : undefined}>
         <li>
           <NavLink to="who-we-are">Who We Are</NavLink>
         </li>
