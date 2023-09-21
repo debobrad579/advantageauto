@@ -82,7 +82,7 @@ describe("Appointment page", () => {
       })
 
       it("should close on click outside modal", async () => {
-        await user.click(document.getElementsByClassName("modal-overlay")[0])
+        await user.click(document.getElementsByClassName("modal")[0])
         expect(
           screen.queryByText("Request Submitted Successfully")
         ).not.toBeInTheDocument()

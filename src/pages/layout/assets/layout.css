@@ -1,11 +1,11 @@
 :root {
-  --side-padding: 10vh;
+  --side-margin: 5%;
   --animation-timing: 400ms ease-in-out;
-}
 
-@media (max-width: 830px) {
-  :root {
-    --side-padding: 25px;
+  @media (max-width: 830px) {
+    & {
+      --side-margin: 25px;
+    }
   }
 }
 
@@ -19,124 +19,131 @@ nav {
   flex-wrap: wrap;
   background-color: var(--dark-grey);
   padding: 8px 0;
-  height: 100px;
-}
+  height: 85px;
+  z-index: 1;
 
-nav img {
-  height: 64px;
-  margin-left: var(--side-padding);
-}
-
-nav > label {
-  --x-width: calc(
-    calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2) * 1.41421356237
-  );
-  --background-color: var(--grey);
-  --bar-width: 60px;
-  --bar-height: 6px;
-  --hamburger-gap: 8px;
-
-  display: none;
-  flex-direction: column;
-  gap: var(--hamburger-gap);
-  cursor: pointer;
-  margin-right: var(--side-padding);
-}
-
-nav > label:hover {
-  --background-color: var(--light-grey);
-}
-
-nav > label.active {
-  --background-color: white;
-}
-
-nav > label::before,
-nav > label > span,
-nav > label::after {
-  content: "";
-  width: var(--bar-width);
-  height: var(--bar-height);
-  background-color: var(--background-color);
-  border-radius: 271828px;
-  transform-origin: left center;
-  transition: opacity var(--animation-timing), width var(--animation-timing),
-    rotate var(--animation-timing), translate var(--animation-timing),
-    background-color var(--animation-timing);
-}
-
-nav > label.active > span {
-  opacity: 0;
-  width: 0;
-}
-
-nav > label.active::before {
-  rotate: 45deg;
-  translate: 0 calc(var(--bar-height) / -2);
-  width: var(--x-width);
-}
-
-nav > label.active::after {
-  rotate: -45deg;
-  translate: 0 calc(var(--bar-height) / 2);
-  width: var(--x-width);
-}
-
-nav > label.active + ul {
-  translate: 0 0;
-}
-
-nav > ul {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  margin-right: var(--side-padding);
-  z-index: -1;
-}
-
-nav li {
-  margin-bottom: 0;
-}
-
-nav a {
-  display: block;
-  text-decoration: none;
-  transition: var(--animation-timing);
-  padding: 8px;
-  color: var(--grey);
-}
-
-nav a:hover {
-  color: var(--light-grey);
-}
-
-nav a.active {
-  color: white;
-}
-
-@media (max-width: 1145px) {
-  nav > label {
-    display: flex;
+  & img {
+    height: 64px;
+    margin-left: var(--side-margin);
   }
 
-  nav > ul.initial {
+  /* Hamburger Menu */
+  & > label {
+    --background-color: var(--grey);
+    --bar-width: 60px;
+    --bar-height: 6px;
+    --hamburger-gap: 8px;
+
     display: none;
+    flex-direction: column;
+    gap: var(--hamburger-gap);
+    cursor: pointer;
+    margin-right: var(--side-margin);
+
+    &:hover {
+      --background-color: var(--light-grey);
+    }
+
+    &::before,
+    & > span,
+    &::after {
+      content: "";
+      width: var(--bar-width);
+      height: var(--bar-height);
+      background-color: var(--background-color);
+      border-radius: 271828px;
+      transform-origin: left center;
+      transition: opacity var(--animation-timing), width var(--animation-timing),
+        rotate var(--animation-timing), translate var(--animation-timing),
+        background-color var(--animation-timing);
+    }
+
+    &.active {
+      --background-color: white;
+
+      & > span {
+        opacity: 0;
+        width: 0;
+      }
+
+      &::before {
+        rotate: 45deg;
+        translate: 0 calc(var(--bar-height) / -2);
+      }
+
+      &::after {
+        rotate: -45deg;
+        translate: 0 calc(var(--bar-height) / 2);
+      }
+
+      &::before,
+      &::after {
+        width: calc(
+          calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2) * 1.41421356237
+        );
+      }
+
+      & + ul {
+        translate: 0 0;
+      }
+    }
+
+    @media (max-width: 1180px) {
+      & {
+        display: flex;
+      }
+    }
   }
 
-  nav > ul {
-    flex-direction: column;
-    align-items: center;
-    transition: translate var(--animation-timing);
-    translate: 0 -320px;
-    background-color: var(--dark-grey);
-    margin: 0;
-    width: 100%;
-    padding: 0 0 16px 0;
+  /* Navbar Links */
+  & > ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin-right: var(--side-margin);
+    z-index: -1;
+
+    & > li {
+      margin-bottom: 0;
+      padding: 8px;
+    }
+
+    & a {
+      display: block;
+      text-decoration: none;
+      transition: var(--animation-timing);
+      color: var(--grey);
+    }
+
+    & a:hover {
+      color: var(--light-grey);
+    }
+
+    & a.active {
+      color: white;
+    }
+
+    @media (max-width: 1180px) {
+      & {
+        flex-direction: column;
+        align-items: center;
+        transition: translate var(--animation-timing);
+        translate: 0 -320px;
+        background-color: var(--dark-grey);
+        margin: 0;
+        width: 100%;
+        padding: 0 0 16px 0;
+      }
+
+      &.initial {
+        display: none;
+      }
+    }
   }
 }
 
 main {
-  padding: 110px var(--side-padding);
+  margin: 110px var(--side-margin) 90px var(--side-margin);
 }
 
 footer {
@@ -149,4 +156,6 @@ footer {
   padding: 24px;
   color: white;
   background-color: var(--dark-grey);
+  height: 65px;
+  z-index: 1;
 }

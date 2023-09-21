@@ -4,6 +4,10 @@
   grid-template-columns: 100px auto;
 }
 
+label.error {
+  color: hsl(345, 100%, 40%);
+}
+
 .input-field {
   width: 100%;
   max-width: 100%;
@@ -13,27 +17,23 @@
   scroll-margin: 112px;
   outline: none;
   background-color: white;
+
+  &:focus {
+    box-shadow: 0 0 3px 0 var(--dark-grey);
+  }
+
+  &.error {
+    border: 1px solid hsl(345, 100%, 40%);
+
+    &:focus {
+      box-shadow: 0 0 3px 0 hsl(345, 100%, 40%);
+    }
+  }
 }
 
 .textarea {
   height: 141px;
   resize: none;
-}
-
-.input-field:focus {
-  box-shadow: 0 0 3px 0 var(--dark-grey);
-}
-
-.input-field.error {
-  border: 1px solid hsl(345, 100%, 40%);
-}
-
-.input-field.error:focus {
-  box-shadow: 0 0 3px 0 hsl(345, 100%, 40%);
-}
-
-label.error {
-  color: hsl(345, 100%, 40%);
 }
 
 .error-popup {
@@ -47,24 +47,24 @@ label.error {
   padding: 7px 11px 4px;
   margin-top: 8px;
   position: absolute;
-}
 
-.error-popup::after,
-.error-popup::before {
-  content: "";
-  border: 7px solid transparent;
-  position: absolute;
-  left: 11px;
-}
+  &::after,
+  &::before {
+    content: "";
+    border: 7px solid transparent;
+    position: absolute;
+    left: 11px;
+  }
 
-.error-popup::after {
-  border-bottom: 7px solid hsl(0, 80%, 94%);
-  top: -13px;
-}
+  &::after {
+    border-bottom: 7px solid hsl(0, 80%, 94%);
+    top: -13px;
+  }
 
-.error-popup::before {
-  border-bottom: 7px solid hsl(358, 100%, 70%);
-  top: -14px;
+  &::before {
+    border-bottom: 7px solid hsl(358, 100%, 70%);
+    top: -14px;
+  }
 }
 
 .form-buttons {
@@ -72,15 +72,15 @@ label.error {
   justify-content: center;
   gap: 5px;
   margin-top: 16px;
-}
 
-.form-buttons > input {
-  width: 370px;
-}
+  & > input {
+    width: 370px;
 
-@media (max-width: 830px) {
-  .form-buttons > input {
-    width: 100%;
+    @media (max-width: 830px) {
+      & {
+        width: 100%;
+      }
+    }
   }
 }
 
@@ -89,32 +89,32 @@ label.error {
   outline: none;
   background-color: var(--light-grey);
   border: 1px solid var(--grey);
-}
 
-.button:hover {
-  background-color: hsl(0, 0%, 80%);
-}
+  &:hover {
+    background-color: hsl(0, 0%, 80%);
+  }
 
-.button:active {
-  background-color: hsl(0, 0%, 70%);
-}
+  &:active {
+    background-color: hsl(0, 0%, 70%);
+  }
 
-.button:focus {
-  outline: 1px solid var(--dark-grey);
-}
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.1);
+  &:focus {
+    outline: 1px solid var(--dark-grey);
+  }
 }
 
 .modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
-  padding: 16px;
-  background-color: white;
-  border: 1px solid var(--dark-grey);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  & > div {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    padding: 16px;
+    background-color: white;
+    border: 1px solid var(--dark-grey);
+  }
 }

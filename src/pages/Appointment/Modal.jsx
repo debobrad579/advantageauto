@@ -24,7 +24,7 @@ export function Modal({ error }) {
   return createPortal(
     isOpen && (
       <div
-        className="modal-overlay"
+        className="modal"
         onClick={e => {
           const modalDimentions = modalRef.current.getBoundingClientRect()
 
@@ -37,7 +37,7 @@ export function Modal({ error }) {
             setIsOpen(false)
         }}
       >
-        <div className="modal" ref={modalRef}>
+        <div ref={modalRef}>
           <p>
             {error?.success
               ? "Request Submitted Successfully"

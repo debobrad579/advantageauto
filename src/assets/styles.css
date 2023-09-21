@@ -20,10 +20,10 @@ body {
 a {
   color: hsl(216, 98%, 52%);
   text-decoration: none;
-}
 
-a:hover {
-  color: hsl(216, 91%, 42%);
+  &:hover {
+    color: hsl(216, 91%, 42%);
+  }
 }
 
 li {
@@ -39,6 +39,12 @@ li {
   display: grid;
   grid-column-gap: 20px;
   grid-template-columns: 1fr 1fr;
+
+  @media (max-width: 830px) {
+    & {
+      grid-template-columns: 1fr;
+    }
+  }
 }
 
 .grid-container-4 {
@@ -46,17 +52,16 @@ li {
   grid-column-gap: 20px;
   grid-row-gap: 20px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-}
 
-@media (max-width: 1200px) {
-  .grid-container-4 {
-    grid-template-columns: 1fr 1fr;
+  @media (max-width: 1180px) {
+    & {
+      grid-template-columns: 1fr 1fr;
+    }
   }
-}
 
-@media (max-width: 830px) {
-  .grid-container,
-  .grid-container-4 {
-    grid-template-columns: 1fr;
+  @media (max-width: 830px) {
+    & {
+      grid-template-columns: 1fr;
+    }
   }
 }
