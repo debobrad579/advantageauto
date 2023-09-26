@@ -1,4 +1,4 @@
-export function ServicesOffered() {
+export default function ServicesOffered() {
   return (
     <>
       <h1>Services Offered:</h1>

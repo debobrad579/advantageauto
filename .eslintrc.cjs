@@ -17,6 +17,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "react/prop-types": "off",
+    "react-refresh/only-export-components": "off",
     "react/no-unescaped-entities": "off",
   },
 }

@@ -1,6 +1,6 @@
 import emailjs from "@emailjs/browser"
 
-export async function handleSubmit({ request }) {
+export async function handleSubmit(request) {
   const data = Object.fromEntries(await request.formData())
   data.services = [data.service1, data.service2, data.service3]
 

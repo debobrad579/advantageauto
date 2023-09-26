@@ -1,13 +1,13 @@
+import { lazy } from "react"
 import { Navigate } from "react-router-dom"
-import { Home } from "pages/Home/index"
-import { WhoWeAre } from "pages/WhoWeAre/index"
-import { Staff } from "pages/Staff/index"
-import { ServicesOffered } from "pages/ServicesOffered/index"
-import { UsedCar } from "pages/UsedCar/index"
-import { VehiclesToAvoid } from "pages/VehiclesToAvoid/index"
-import { Appointment } from "pages/Appointment/index"
-import { Layout } from "pages/layout/index"
-import { handleSubmit } from "pages/Appointment/handleSubmit"
+import { Layout } from "layout/index"
+const Home = lazy(() => import("pages/Home/index.jsx"))
+const WhoWeAre = lazy(() => import("pages/WhoWeAre/index.jsx"))
+const Staff = lazy(() => import("pages/Staff/index.jsx"))
+const ServicesOffered = lazy(() => import("pages/ServicesOffered/index.jsx"))
+const UsedCar = lazy(() => import("pages/UsedCar/index.jsx"))
+const VehiclesToAvoid = lazy(() => import("pages/VehiclesToAvoid/index.jsx"))
+const Appointment = lazy(() => import("pages/Appointment/index.jsx"))
 
 export const routes = [
   {
@@ -25,7 +25,10 @@ export const routes = [
       {
         path: "appointment-request",
         element: <Appointment />,
-        action: handleSubmit,
+        action: async ({ request }) =>
+          await import("pages/Appointment/handleSubmit").then(module =>
+            module.handleSubmit(request)
+          ),
       },
     ],
   },

@@ -1,6 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
-import logo from "./assets/logo.png"
 
 export function Navbar() {
   const [dropdown, setDropdown] = useState()
@@ -13,21 +12,17 @@ export function Navbar() {
     }
 
     window.addEventListener("resize", handleResize)
+    handleResize()
 
     return () => {
       window.removeEventListener("resize", handleResize)
     }
-  }, [])
-
-  useEffect(() => {
-    if (window.innerWidth > 1180) setDropdown(undefined)
-    else setDropdown(false)
   }, [location])
 
   return (
     <nav>
       <NavLink to="/home">
-        <img src={logo} />
+        <img src="./logo.png" />
       </NavLink>
       <label
         tabIndex="0"

@@ -5,7 +5,7 @@ import { Input } from "./Input"
 import { Modal } from "./Modal"
 import { MAKES, SERVICES } from "./constants"
 
-export function Appointment() {
+export default function Appointment() {
   const error = useActionData()
   const { state } = useNavigation()
 

@@ -1,5 +1,5 @@
 :root {
-  --side-margin: 5%;
+  --side-margin: 5vw;
   --animation-timing: 400ms ease-in-out;
 
   @media (max-width: 830px) {
@@ -23,7 +23,7 @@ nav {
   z-index: 1;
 
   & img {
-    height: 64px;
+    width: 190px;
     margin-left: var(--side-margin);
   }
 

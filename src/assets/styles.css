@@ -1,7 +1,7 @@
 :root {
   --dark-grey: hsl(210, 11%, 15%);
   --grey: hsl(0, 0%, 55%);
-  --light-grey: hsl(0, 0%, 85%);
+  --light-grey: hsl(0, 0%, 80%);
 }
 
 *,
@@ -31,8 +31,53 @@ li {
 }
 
 .photo {
+  position: relative;
   width: 100%;
-  border: 2px solid var(--dark-grey);
+  height: 0;
+  padding-top: 100%;
+  background-size: cover;
+  background-position: center;
+  background-fit: cover;
+  outline: 2px solid var(--dark-grey);
+  animation: pulse 2.5s infinite;
+
+  &::before {
+    content: "Loading...";
+    font-size: 3rem;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    object-position: center;
+    object-fit: cover;
+  }
+
+  & > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    object-position: center;
+    object-fit: cover;
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    background-color: var(--grey);
+  }
+
+  50% {
+    background-color: var(--light-grey);
+  }
+
+  100% {
+    background-color: var(--grey);
+  }
 }
 
 .grid-container {

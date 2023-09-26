@@ -1,10 +1,23 @@
-import shop from "./assets/shop.jpg"
+import { useRef } from "react"
 
-export function Home() {
+export default function Home() {
+  const imgRef = useRef(null)
+
   return (
     <div className="grid-container">
-      <div>
-        <img className="photo" src={shop} alt="Advantage Auto Building" />
+      <div className="photo" style={{ paddingTop: "43.75%" }}>
+        <img
+          ref={imgRef}
+          alt="Advantage Auto Building"
+          src={`./home/shop-1200.jpg`}
+          srcSet={`
+            ./home/shop-400.jpg 400w,
+            ./home/shop-600.jpg 600w,
+            ./home/shop-800.jpg 800w,
+            ./home/shop-1000.jpg 1000w`}
+          sizes="(max-width: 830px) 100vw, 40vw"
+          onLoad={() => (imgRef.current.style.opacity = 1)}
+        />
       </div>
       <div>
         <h2>Hours:</h2>

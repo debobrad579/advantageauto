@@ -1,4 +1,4 @@
-export function VehiclesToAvoid() {
+export default function VehiclesToAvoid() {
   return (
     <>
       <h1>Vehicles to Avoid</h1>

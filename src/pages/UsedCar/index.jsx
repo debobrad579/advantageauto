@@ -1,4 +1,4 @@
-export function UsedCar() {
+export default function UsedCar() {
   return (
     <>
       <h1>Buying a Used Car?</h1>

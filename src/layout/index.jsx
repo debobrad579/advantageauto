@@ -1,6 +1,7 @@
 import "./assets/layout.css"
 import { Outlet, ScrollRestoration } from "react-router-dom"
 import { Navbar } from "./Navbar"
+import { Suspense } from "react"
 
 export function Layout() {
   return (
@@ -8,7 +9,9 @@ export function Layout() {
       <Navbar />
       <ScrollRestoration />
       <main>
-        <Outlet />
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <Outlet />
+        </Suspense>
       </main>
       <footer>
         <div>&copy; Advantage Auto</div>

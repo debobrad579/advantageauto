@@ -31,9 +31,7 @@ describe("Appointment page", () => {
     }
   }
 
-  async function submit() {
-    await user.click(screen.getByText("Submit"))
-  }
+  let submitButton
 
   beforeEach(async () => {
     render(<div id="modal-container" />)
@@ -46,12 +44,14 @@ describe("Appointment page", () => {
         />
       </>
     )
+
+    submitButton = await screen.findByText("Submit")
   })
 
   describe("Valid form data", () => {
     it("should submit form on valid form data", async () => {
       await fillOutForm()
-      await submit()
+      await user.click(submitButton)
 
       expect(
         await screen.findByText("Request Submitted Successfully")
@@ -61,7 +61,7 @@ describe("Appointment page", () => {
     describe("Success modal", () => {
       beforeEach(async () => {
         await fillOutForm()
-        await submit()
+        await user.click(submitButton)
       })
       it("should autofocus on close button", async () => {
         expect(await screen.findByText("Close")).toHaveFocus()
@@ -101,7 +101,7 @@ describe("Appointment page", () => {
 
     describe("Error popup", () => {
       it("should remove error on input change", async () => {
-        await submit()
+        await user.click(submitButton)
         await user.type(screen.getByLabelText("Name:"), "Test Name")
 
         expect(
@@ -111,10 +111,10 @@ describe("Appointment page", () => {
       })
 
       it("should rerender error on second invalid form submission", async () => {
-        await submit()
+        await user.click(submitButton)
         await user.type(screen.getByLabelText("Name:"), "Test Name")
         await user.clear(screen.getByLabelText("Name:"))
-        await submit()
+        await user.click(submitButton)
         await expectError(
           screen.getByLabelText("Name:"),
           "Please enter a name."
@@ -122,7 +122,7 @@ describe("Appointment page", () => {
       })
 
       it("should remove error popup on blur", async () => {
-        await submit()
+        await user.click(submitButton)
         await user.tab()
 
         expect(
@@ -135,7 +135,7 @@ describe("Appointment page", () => {
     describe("Invalid name", () => {
       it("should display required error on blank name", async () => {
         await fillOutForm("Name:")
-        await submit()
+        await user.click(submitButton)
         await expectError(
           screen.getByLabelText("Name:"),
           "Please enter a name."
@@ -146,7 +146,7 @@ describe("Appointment page", () => {
     describe("Invalid phone", () => {
       it("should display required error on blank phone", async () => {
         await fillOutForm("Phone:")
-        await submit()
+        await user.click(submitButton)
         await expectError(
           screen.getByLabelText("Phone:"),
           "Please enter a phone number."
@@ -163,23 +163,23 @@ describe("Appointment page", () => {
       })
 
       it("should display required error on blank email", async () => {
-        await submit()
+        await user.click(submitButton)
         await expectError(emailInput, "Please enter an email address.")
       })
 
       it("should display invalid email error on invalid email", async () => {
         await user.type(emailInput, "test")
-        await submit()
+        await user.click(submitButton)
         await expectError(emailInput, "Please enter a valid email address.")
 
         await user.clear(emailInput)
         await user.type(emailInput, "test@example")
-        await submit()
+        await user.click(submitButton)
         await expectError(emailInput, "Please enter a valid email address.")
 
         await user.clear(emailInput)
         await user.type(emailInput, "test@example.")
-        await submit()
+        await user.click(submitButton)
         await expectError(emailInput, "Please enter a valid email address.")
       })
     })
@@ -193,25 +193,25 @@ describe("Appointment page", () => {
       })
 
       it("should display required error on blank year", async () => {
-        await submit()
+        await user.click(submitButton)
         await expectError(yearInput, "Please enter a year.")
       })
 
       it("should display only numeric error on non-numeric year", async () => {
         await user.type(yearInput, "2.718281828459")
-        await submit()
+        await user.click(submitButton)
         await expectError(yearInput, "Please enter a numeric year.")
       })
 
       it("should display under minimum error on year below 1900", async () => {
         await user.type(yearInput, "1800")
-        await submit()
+        await user.click(submitButton)
         await expectError(yearInput, "Please enter a year after 1900.")
       })
 
       it("should display over maximum error on year in the future", async () => {
         await user.type(yearInput, "10000")
-        await submit()
+        await user.click(submitButton)
         await expectError(yearInput, "Please enter a year in the past.")
       })
     })
@@ -219,7 +219,7 @@ describe("Appointment page", () => {
     describe("Invalid make", () => {
       it("should display required error on unselected make", async () => {
         await fillOutForm("Make:")
-        await submit()
+        await user.click(submitButton)
         await expectError(
           screen.getByLabelText("Make:"),
           "Please select a make."
@@ -230,7 +230,7 @@ describe("Appointment page", () => {
     describe("Invalid model", () => {
       it("should display required error on blank model", async () => {
         await fillOutForm("Model:")
-        await submit()
+        await user.click(submitButton)
         await expectError(
           screen.getByLabelText("Model:"),
           "Please enter a model."
@@ -241,7 +241,7 @@ describe("Appointment page", () => {
     describe("Invalid services", () => {
       it("should display required error on no selected services", async () => {
         await fillOutForm("Services:")
-        await submit()
+        await user.click(submitButton)
         await expectError(
           screen.getByLabelText("Services:"),
           "Please select at least one service."
@@ -258,13 +258,13 @@ describe("Appointment page", () => {
       })
 
       it("should display required error on blank date", async () => {
-        await submit()
+        await user.click(submitButton)
         await expectError(dateInput, "Please select a date.")
       })
 
       it("should display only weekdays error on weekend date", async () => {
         await user.type(dateInput, "2023-09-17")
-        await submit()
+        await user.click(submitButton)
         await expectError(dateInput, "Please select a weekday.")
       })
     })
@@ -278,13 +278,13 @@ describe("Appointment page", () => {
       })
 
       it("should display required error on blank time", async () => {
-        await submit()
+        await user.click(submitButton)
         await expectError(timeInput, "Please select a time.")
       })
 
       it("should display only open hours error on time during closed hours (Mon - Thu)", async () => {
         await user.type(timeInput, "07:30")
-        await submit()
+        await user.click(submitButton)
         await expectError(
           timeInput,
           "Please select a time between 8:00 AM and 5:00 PM."
@@ -292,7 +292,7 @@ describe("Appointment page", () => {
 
         await user.clear(timeInput)
         await user.type(timeInput, "17:30")
-        await submit()
+        await user.click(submitButton)
         await expectError(
           timeInput,
           "Please select a time between 8:00 AM and 5:00 PM."
@@ -304,7 +304,7 @@ describe("Appointment page", () => {
         await user.type(screen.getByLabelText("Date:"), "2023-09-15")
 
         await user.type(timeInput, "07:30")
-        await submit()
+        await user.click(submitButton)
         await expectError(
           timeInput,
           "Please select a time between 8:00 AM and 1:30 PM."
@@ -312,7 +312,7 @@ describe("Appointment page", () => {
 
         await user.clear(timeInput)
         await user.type(timeInput, "14:00")
-        await submit()
+        await user.click(submitButton)
         await expectError(
           timeInput,
           "Please select a time between 8:00 AM and 1:30 PM."
