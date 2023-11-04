@@ -13,7 +13,7 @@ export default function Appointment() {
   return (
     <>
       <Helmet htmlAttributes>
-        <title>Appointment Request</title>
+        <title>Appointment Request | Advantage Auto</title>
       </Helmet>
       <h1>Appointment Request</h1>
       <Form method="post" autoComplete="off" noValidate>
