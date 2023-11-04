@@ -1,6 +1,11 @@
+import { Helmet } from "react-helmet"
+
 export default function UsedCar() {
   return (
     <>
+      <Helmet htmlAttributes>
+        <title>Buying a Used Car? | Advantage Auto</title>
+      </Helmet>
       <h1>Buying a Used Car?</h1>
       <p>
         Transportation is generally the second biggest cost of living in our

@@ -1,6 +1,11 @@
+import { Helmet } from "react-helmet"
+
 export default function ServicesOffered() {
   return (
     <>
+      <Helmet htmlAttributes>
+        <title>Services Offered | Advantage Auto</title>
+      </Helmet>
       <h1>Services Offered:</h1>
       <p>We offer the following services:</p>
       <ul>

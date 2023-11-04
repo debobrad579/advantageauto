@@ -1,6 +1,11 @@
+import { Helmet } from "react-helmet"
+
 export default function VehiclesToAvoid() {
   return (
     <>
+      <Helmet htmlAttributes>
+        <title>Vehicles to Avoid | Advantage Auto</title>
+      </Helmet>
       <h1>Vehicles to Avoid</h1>
       <p>
         We have some vehicles that we find are not reliable enough, are in need

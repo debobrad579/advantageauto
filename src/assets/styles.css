@@ -30,6 +30,10 @@ li {
   margin-bottom: 8px;
 }
 
+ul {
+  padding-left: 30px;
+}
+
 .photo {
   position: relative;
   width: 100%;

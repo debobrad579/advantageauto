@@ -1,6 +1,11 @@
+import { Helmet } from "react-helmet"
+
 export default function WhoWeAre() {
   return (
     <>
+      <Helmet htmlAttributes>
+        <title>Who We Are | Advantage Auto</title>
+      </Helmet>
       <h1>Who We Are</h1>
       <p>
         Thanks for taking the time to research our business. Advantage Auto

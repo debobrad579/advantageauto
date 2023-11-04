@@ -6,18 +6,22 @@ export function Navbar() {
   const location = useLocation()
 
   useEffect(() => {
+    if (window.innerWidth > 1180) setDropdown(undefined)
+    else setDropdown(false)
+  }, [location])
+
+  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 1180) setDropdown(undefined)
       else setDropdown(false)
     }
 
     window.addEventListener("resize", handleResize)
-    handleResize()
 
     return () => {
       window.removeEventListener("resize", handleResize)
     }
-  }, [location])
+  }, [])
 
   return (
     <nav>

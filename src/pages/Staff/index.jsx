@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet"
 import { Member } from "./Member"
 
 export default function Staff() {
   return (
     <>
+      <Helmet htmlAttributes>
+        <title>Staff | Advantage Auto</title>
+      </Helmet>
       <h1>Staff:</h1>
       <div className="grid-container-4">
         <Member image="owen" alt="Owen DeBoer">

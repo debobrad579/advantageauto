@@ -1,5 +1,6 @@
 import "./assets/appointment.css"
 import { Form, useActionData, useNavigation } from "react-router-dom"
+import { Helmet } from "react-helmet"
 import { Select } from "./Select"
 import { Input } from "./Input"
 import { Modal } from "./Modal"
@@ -11,6 +12,9 @@ export default function Appointment() {
 
   return (
     <>
+      <Helmet htmlAttributes>
+        <title>Appointment Request</title>
+      </Helmet>
       <h1>Appointment Request</h1>
       <Form method="post" autoComplete="off" noValidate>
         <div className="grid-container">
