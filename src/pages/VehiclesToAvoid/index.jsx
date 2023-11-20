@@ -5,12 +5,16 @@ export default function VehiclesToAvoid() {
     <>
       <Helmet htmlAttributes>
         <title>Vehicles to Avoid | Advantage Auto</title>
+        <meta
+          name="description"
+          content="We have some vehicles that we find are not reliable enough, are in need of constant repairs, or have premature major drive train failures."
+        />
       </Helmet>
       <h1>Vehicles to Avoid</h1>
       <p>
         We have some vehicles that we find are not reliable enough, are in need
         of constant repairs or have premature major drive train failures.
-        Vehicles that we recommend as to avoid purchasing:
+        Vehicles that we recommend avoiding are the following:
       </p>
       <ul>
         <li>

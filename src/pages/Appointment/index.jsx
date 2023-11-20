@@ -14,6 +14,10 @@ export default function Appointment() {
     <>
       <Helmet htmlAttributes>
         <title>Appointment Request | Advantage Auto</title>
+        <meta
+          name="description"
+          content="Book an appointment online here to get any auto service your vehicle may need."
+        />
       </Helmet>
       <h1>Appointment Request</h1>
       <Form method="post" autoComplete="off" noValidate>

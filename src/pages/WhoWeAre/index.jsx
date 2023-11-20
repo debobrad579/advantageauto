@@ -5,11 +5,15 @@ export default function WhoWeAre() {
     <>
       <Helmet htmlAttributes>
         <title>Who We Are | Advantage Auto</title>
+        <meta
+          name="description"
+          content="Advantage Auto started in 2004 when we purchased an existing business that had a history of dependable auto service since the 1950's."
+        />
       </Helmet>
       <h1>Who We Are</h1>
       <p>
         Thanks for taking the time to research our business. Advantage Auto
-        started in 2004 when we purchased and existing business that had a
+        started in 2004 when we purchased an existing business that had a
         history of dependable auto service since the 1950's. We spent the first
         5 years in the original business location until we out grew it and moved
         to our present facility in 2009. Our present location has offed us the

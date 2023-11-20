@@ -7,7 +7,10 @@ export default function Home() {
   return (
     <>
       <Helmet htmlAttributes>
-        <title>Advantage Auto</title>
+        <meta
+          name="description"
+          content="Our hours are Monday through Thursday 8 am through 5 pm, Fridays 8 am though 1:30 pm."
+        />
       </Helmet>
       <div className="grid-container">
         <div className="photo" style={{ paddingTop: "43.75%" }}>

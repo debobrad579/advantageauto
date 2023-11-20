@@ -5,6 +5,10 @@ export default function ServicesOffered() {
     <>
       <Helmet htmlAttributes>
         <title>Services Offered | Advantage Auto</title>
+        <meta
+          name="description"
+          content="Services we offer include brakes, suspension, alignment, exhaust, diagnostics, electrical, emissions, dripless undercoating, and more."
+        />
       </Helmet>
       <h1>Services Offered:</h1>
       <p>We offer the following services:</p>

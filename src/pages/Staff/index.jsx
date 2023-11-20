@@ -6,6 +6,10 @@ export default function Staff() {
     <>
       <Helmet htmlAttributes>
         <title>Staff | Advantage Auto</title>
+        <meta
+          name="description"
+          content="Meet our staff who have been working here reliably fo many years."
+        />
       </Helmet>
       <h1>Staff:</h1>
       <div className="grid-container-4">

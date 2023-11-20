@@ -5,11 +5,15 @@ export default function UsedCar() {
     <>
       <Helmet htmlAttributes>
         <title>Buying a Used Car? | Advantage Auto</title>
+        <meta
+          name="description"
+          content="Buying a used car can be overwhelming, so we have some tips that can save you both time and money."
+        />
       </Helmet>
       <h1>Buying a Used Car?</h1>
       <p>
         Transportation is generally the second biggest cost of living in our
-        culture. Buying a used car can be overwhelming, but here are some tips
+        culture. Buying a used car can be overwhelming, so here are some tips
         that can save you both time and money:
       </p>
       <ul>
