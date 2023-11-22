@@ -1,5 +1,3 @@
-import emailjs from "@emailjs/browser"
-
 export async function handleSubmit(request) {
   const data = Object.fromEntries(await request.formData())
   data.services = [data.service1, data.service2, data.service3]
@@ -13,32 +11,19 @@ export async function handleSubmit(request) {
   }
 
   if (process.env.NODE_ENV !== "production") return { success: true }
-  return await emailjs
-    .send(
-      "service_ernk545",
-      "template_n738fta",
-      {
-        name: data.name,
-        phone: data.phone,
-        email: data.email,
-        year: data.year,
-        make: data.make.replace("+", " "),
-        model: data.model,
-        services: formatServices(
-          data.services[0],
-          data.services[1],
-          data.services[2]
-        ),
-        date: formatDate(data.date),
-        time: formatTime(data.time),
-        additional: data.additional,
-      },
-      "z9wM1wbI41kkRotot"
-    )
-    .then(
-      () => ({ success: true }),
-      () => ({ success: false })
-    )
+
+  return await fetch("https://www.advantageauto.ca/api/email", {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then(res => res.json())
+    .catch(() => {
+      return { success: false }
+    })
 }
 
 function getPossibleErrors() {
@@ -154,37 +139,4 @@ function getPossibleErrors() {
       },
     ],
   }
-}
-
-function formatServices(service1, service2, service3) {
-  return [service1, service2, service3]
-    .filter(i => i != null)
-    .map(i => i.replace("+", " "))
-    .join(", ")
-}
-
-function formatDate(date) {
-  const [year, month, day] = date.split("-").map(Number)
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ]
-  return `${monthNames[month - 1]} ${day}, ${year}`
-}
-
-function formatTime(time) {
-  const [hour, minute] = time.split(":").map(Number)
-  return `${hour % 12 !== 0 ? hour % 12 : 12}:${minute
-    .toString()
-    .padStart(2, "0")} ${hour < 12 ? "AM" : "PM"}`
 }
