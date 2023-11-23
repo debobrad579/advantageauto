@@ -1,9 +1,9 @@
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet-async"
 
 export default function ServicesOffered() {
   return (
     <>
-      <Helmet htmlAttributes>
+      <Helmet>
         <title>Services Offered | Advantage Auto</title>
         <meta
           name="description"

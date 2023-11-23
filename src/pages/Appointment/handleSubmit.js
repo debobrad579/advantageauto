@@ -12,7 +12,7 @@ export async function handleSubmit(request) {
 
   if (process.env.NODE_ENV !== "production") return { success: true }
 
-  return await fetch("https://www.advantageauto.ca/api/email", {
+  return await fetch("https://www.advantageauto.ca/api/email.js", {
     method: "POST",
     mode: "cors",
     headers: {

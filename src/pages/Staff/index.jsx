@@ -1,10 +1,10 @@
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet-async"
 import { Member } from "./Member"
 
 export default function Staff() {
   return (
     <>
-      <Helmet htmlAttributes>
+      <Helmet>
         <title>Staff | Advantage Auto</title>
         <meta
           name="description"

@@ -1,9 +1,9 @@
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet-async"
 
 export default function WhoWeAre() {
   return (
     <>
-      <Helmet htmlAttributes>
+      <Helmet>
         <title>Who We Are | Advantage Auto</title>
         <meta
           name="description"

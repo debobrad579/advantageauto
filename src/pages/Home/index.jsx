@@ -1,12 +1,12 @@
 import { useRef } from "react"
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet-async"
 
 export default function Home() {
   const imgRef = useRef(null)
 
   return (
     <>
-      <Helmet htmlAttributes>
+      <Helmet>
         <meta
           name="description"
           content="Our hours are Monday through Thursday 8 am through 5 pm, Fridays 8 am though 1:30 pm."

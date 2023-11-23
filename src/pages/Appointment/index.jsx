@@ -1,6 +1,6 @@
 import "./assets/appointment.css"
 import { Form, useActionData, useNavigation } from "react-router-dom"
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet-async"
 import { Select } from "./Select"
 import { Input } from "./Input"
 import { Modal } from "./Modal"
@@ -12,7 +12,7 @@ export default function Appointment() {
 
   return (
     <>
-      <Helmet htmlAttributes>
+      <Helmet>
         <title>Appointment Request | Advantage Auto</title>
         <meta
           name="description"
