@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export function useErrorHandling(error, obj, ref) {
+export function useErrorHandling(error, ref) {
   const [showError, setShowError] = useState(false)
   const [showErrorPopup, setShowErrorPopup] = useState(false)
 
@@ -13,10 +13,11 @@ export function useErrorHandling(error, obj, ref) {
     return () => {
       setShowError(false)
     }
-  }, [error, obj, ref])
+  }, [error, ref])
 
   function handleChange() {
-    setShowError(false)
+    if (error?.conditional(ref.current.value)) setShowError(true)
+    else setShowError(false)
   }
 
   function handleBlur() {

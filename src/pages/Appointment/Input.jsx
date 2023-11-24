@@ -1,11 +1,11 @@
 import { useId, useRef } from "react"
 import { useErrorHandling } from "./useErrorHandling"
 
-export function Input({ label, name, type = "text", error, obj }) {
+export function Input({ label, name, type = "text", error }) {
   const id = useId()
   const inputRef = useRef(null)
   const { showError, showErrorPopup, handleChange, handleBlur, handleFocus } =
-    useErrorHandling(error, obj, inputRef)
+    useErrorHandling(error, inputRef)
 
   return (
     <>
@@ -24,7 +24,7 @@ export function Input({ label, name, type = "text", error, obj }) {
           onFocus={handleFocus}
         />
         {showError && showErrorPopup && (
-          <div className="error-popup">{error}</div>
+          <div className="error-popup">{error.message}</div>
         )}
       </div>
     </>

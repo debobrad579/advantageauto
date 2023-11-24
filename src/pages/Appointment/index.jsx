@@ -25,25 +25,18 @@ export default function Appointment() {
           <div>
             <h3>Client Information</h3>
             <div className="form-group">
-              <Input
-                label="Name:"
-                name="name"
-                error={error?.name}
-                obj={error}
-              />
+              <Input label="Name:" name="name" error={error?.name} />
               <Input
                 label="Phone:"
                 name="phone"
                 type="tel"
                 error={error?.phone}
-                obj={error}
               />
               <Input
                 label="Email:"
                 name="email"
                 type="email"
                 error={error?.email}
-                obj={error}
               />
             </div>
           </div>
@@ -55,7 +48,6 @@ export default function Appointment() {
                 name="year"
                 type="number"
                 error={error?.year}
-                obj={error}
               />
               <Select
                 label="Make:"
@@ -63,14 +55,8 @@ export default function Appointment() {
                 name="make"
                 options={MAKES}
                 error={error?.make}
-                obj={error}
               />
-              <Input
-                label="Model:"
-                name="model"
-                error={error?.model}
-                obj={error}
-              />
+              <Input label="Model:" name="model" error={error?.model} />
             </div>
           </div>
           <div>
@@ -81,36 +67,31 @@ export default function Appointment() {
                 defaultValue="Select a Service"
                 name="service1"
                 options={SERVICES}
-                error={error?.services}
-                obj={error}
+                error={error?.service1}
               />
               <Select
                 label=""
                 defaultValue="Select a Service"
                 name="service2"
                 options={SERVICES}
-                obj={error}
               />
               <Select
                 label=""
                 defaultValue="Select a Service"
                 name="service3"
                 options={SERVICES}
-                obj={error}
               />
               <Input
                 label="Date:"
                 name="date"
                 type="date"
                 error={error?.date}
-                obj={error}
               />
               <Input
                 label="Time:"
                 name="time"
                 type="time"
                 error={error?.time}
-                obj={error}
               />
             </div>
           </div>

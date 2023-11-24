@@ -1,24 +1,24 @@
 import { createTransport } from "nodemailer"
 
 export default function handler(request, response) {
-  try {
-    if (request.method != "POST") return
+  if (request.method != "POST")
+    return response.status(405).json({ error: "Method Not Allowed" })
 
-    const data = request.body
+  const data = request.body
 
-    const transporter = createTransport({
-      service: "gmail",
-      auth: {
-        user: "bradydeboer195@gmail.com",
-        pass: process.env.EMAIL_PASSWORD,
-      },
-    })
+  const transporter = createTransport({
+    service: "gmail",
+    auth: {
+      user: "bradydeboer195@gmail.com",
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  })
 
-    const mailOptions = {
-      from: "bradydeboer195@gmail.com",
-      to: "thebradster7.bd@gmail.com",
-      subject: "Test",
-      text: `
+  const mailOptions = {
+    from: "bradydeboer195@gmail.com",
+    to: "thebradster7.bd@gmail.com",
+    subject: "Online Appointment Request",
+    text: `
 Client Information:
 Name: ${data.name}
 Phone: ${data.phone}
@@ -34,10 +34,10 @@ Services: ${formatServices(data.services)}
 Date: ${formatDate(data.date)}
 Time: ${formatTime(data.time)}
 
-Additional Information:
+${data.additional ? "Additional Information:" : ""}
 ${data.additional}
     `,
-      html: `
+    html: `
 <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
   <h2>Client Information</h2>
   <p>
@@ -63,19 +63,16 @@ ${data.additional}
     <br>
     Time: ${formatTime(data.time)}
   </p>
-  <h2>Additional Information</h2>
+  ${data.additional ? "<h2>Additional Information</h2>" : ""}
   <p>${data.additional}</p>
 </div>
     `,
-    }
-
-    transporter.sendMail(mailOptions, error => {
-      if (error) response.json({ success: false })
-      else response.json({ success: true })
-    })
-  } catch {
-    response.json({ success: false })
   }
+
+  transporter.sendMail(mailOptions, error => {
+    if (error) return response.status(500).json({ error })
+    else return response.status(200).json({ success: true })
+  })
 }
 
 function formatServices(services) {
