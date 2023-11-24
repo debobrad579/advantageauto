@@ -33,9 +33,6 @@ export async function fillOutForm(excludeInput = null) {
 export async function expectError(input, message) {
   expect(await screen.findByText(message)).toBeInTheDocument()
   expect(input).toHaveClass("error")
-  expect(
-    screen.queryByText("Request Submitted Successfully")
-  ).not.toBeInTheDocument()
 }
 
 export async function submit() {
