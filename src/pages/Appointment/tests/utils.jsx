@@ -1,12 +1,35 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { addDays, format, getDay } from "date-fns"
 import { RouterProvider, createMemoryRouter } from "react-router-dom"
 import { routes } from "routes"
 import { expect } from "vitest"
 
 export const user = userEvent.setup()
 
+export function getCloseDay(dayOfWeek) {
+  const daysOfWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ]
+
+  return format(
+    addDays(
+      new Date(),
+      ((daysOfWeek.indexOf(dayOfWeek) - getDay(new Date()) + 7) % 7) + 7
+    ),
+    "yyyy-MM-dd"
+  )
+}
+
 export async function fillOutForm(excludeInput = null) {
+  await screen.findByText("Submit")
+
   const inputs = {
     "Name:": "Test Name",
     "Phone:": "1-800-TEST",
@@ -15,7 +38,7 @@ export async function fillOutForm(excludeInput = null) {
     "Make:": "Ford",
     "Model:": "F 150",
     "Services:": "Brakes",
-    "Date:": "2023-09-14",
+    "Date:": getCloseDay("Wednesday"),
     "Time:": "10:30",
   }
 

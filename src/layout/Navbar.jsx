@@ -26,7 +26,7 @@ export function Navbar() {
   return (
     <nav>
       <NavLink to="/home">
-        <img src="./logo.png" />
+        <img src="./logo.png" alt="Advantage Auto" />
       </NavLink>
       <label
         tabIndex="0"

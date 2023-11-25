@@ -15,7 +15,7 @@ export const routes = [
     element: <Layout />,
     children: [
       { index: true, element: <Navigate to="home" /> },
-      { path: "*", element: <h1>404 - Page not found</h1> },
+      { path: "*", element: <h1>404 - Page not found.</h1> },
       { path: "home", element: <Home /> },
       { path: "who-we-are", element: <WhoWeAre /> },
       { path: "staff", element: <Staff /> },

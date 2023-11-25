@@ -2,10 +2,9 @@ import { beforeEach, describe, expect, it } from "vitest"
 import { expectError, renderPage, submit, user } from "./utils"
 import { screen, waitFor } from "@testing-library/react"
 
-describe("Invalid form data popup", () => {
+describe("Error popup", () => {
   beforeEach(async () => {
     renderPage()
-    await screen.findByText("Submit")
   })
 
   it("should remove error on input change to valid", async () => {

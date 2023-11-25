@@ -46,7 +46,7 @@ export default function Appointment() {
               <Input
                 label="Year:"
                 name="year"
-                type="number"
+                inputProps={{ inputMode: "numeric" }}
                 error={error?.year}
               />
               <Select

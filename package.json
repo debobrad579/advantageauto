@@ -6,12 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test": "vitest --reporter=verbose",
+    "test": "DEBUG_PRINT_LIMIT=0 vitest --reporter=verbose",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "@vercel/analytics": "^1.1.1",
+    "date-fns": "^2.30.0",
     "nodemailer": "^6.9.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -31,6 +32,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "jsdom": "^22.1.0",
+    "msw": "^2.0.9",
     "postcss": "^8.4.30",
     "postcss-preset-env": "^9.1.4",
     "vite": "^4.4.5",

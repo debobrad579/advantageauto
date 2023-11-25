@@ -1,3 +1,12 @@
+import {
+  addYears,
+  isAfter,
+  isBefore,
+  isFriday,
+  isWeekend,
+  parse,
+} from "date-fns"
+
 export function catchErrors(data) {
   for (const key in ERRORS) {
     for (let i = 0; i < ERRORS[key].length; i++) {
@@ -6,21 +15,13 @@ export function catchErrors(data) {
     }
   }
 
-  const [selectedYear, selectedMonth, selectedDay] = data.date
-    .split("-")
-    .map(Number)
-  const dayOfWeek =
-    (selectedDay +
-      Math.floor((13 * (selectedMonth + 1)) / 5) +
-      selectedYear +
-      Math.floor(selectedYear / 4) -
-      Math.floor(selectedYear / 100) +
-      Math.floor(selectedYear / 400)) %
-    7
   const numericTime =
     Number(data.time.slice(0, 2)) + Number(data.time.slice(3, 5)) / 60
 
-  if (dayOfWeek === 6 && numericTime > 13.5)
+  if (
+    isFriday(parse(data.date, "yyyy-MM-dd", new Date())) &&
+    numericTime > 13.5
+  )
     return {
       time: {
         message: "Please select a time before 1:30 PM on Fridays.",
@@ -61,8 +62,8 @@ const ERRORS = {
       conditional: year => year === "",
     },
     {
-      message: "Please enter a numeric year.",
-      conditional: year => !/^-?\d+$/.test(year),
+      message: "Please enter an integer year.",
+      conditional: year => !/^[0-9]*$/.test(year),
     },
     {
       message: "Please enter a year after 1900.",
@@ -97,21 +98,18 @@ const ERRORS = {
       conditional: date => date === "",
     },
     {
+      message: "Please select a date in the future.",
+      conditional: date =>
+        isBefore(parse(date, "yyyy-MM-dd", new Date()), new Date()),
+    },
+    {
+      message: "Please select a date within a year.",
+      conditional: date =>
+        isAfter(parse(date, "yyyy-MM-dd", new Date()), addYears(new Date(), 1)),
+    },
+    {
       message: "Please select a weekday.",
-      conditional: date => {
-        const [selectedYear, selectedMonth, selectedDay] = date
-          .split("-")
-          .map(Number)
-        const dayOfWeek =
-          (selectedDay +
-            Math.floor((13 * (selectedMonth + 1)) / 5) +
-            selectedYear +
-            Math.floor(selectedYear / 4) -
-            Math.floor(selectedYear / 100) +
-            Math.floor(selectedYear / 400)) %
-          7
-        return [0, 1].includes(dayOfWeek)
-      },
+      conditional: date => isWeekend(parse(date, "yyyy-MM-dd", new Date())),
     },
   ],
   time: [

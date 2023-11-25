@@ -5,43 +5,50 @@ import { fillOutForm, expectError, submit, renderPage, user } from "./utils"
 describe("Invalid vehicle information", () => {
   beforeEach(async () => {
     renderPage()
-    await screen.findByText("Submit")
   })
 
   describe("Invalid year", () => {
     let yearInput
 
     beforeEach(async () => {
-      yearInput = screen.getByLabelText("Year:")
       await fillOutForm("Year:")
+      yearInput = screen.getByLabelText("Year:")
     })
 
-    it("should display required error on blank year", async () => {
+    it("should display 'Please enter a year.' on blank year", async () => {
       await submit()
       await expectError(yearInput, "Please enter a year.")
     })
 
-    it("should display only numeric error on non-numeric year", async () => {
-      await user.type(yearInput, "2.718281828459")
-      await submit()
-      await expectError(yearInput, "Please enter a numeric year.")
+    describe("should display 'Please enter an integer year.' on...", () => {
+      it("decimal year", async () => {
+        await user.type(yearInput, "2.718281828459")
+        await submit()
+        await expectError(yearInput, "Please enter an integer year.")
+      })
+
+      it("letter year", async () => {
+        await user.type(yearInput, "e")
+        await submit()
+        await expectError(yearInput, "Please enter an integer year.")
+      })
     })
 
-    it("should display under minimum error on year below 1900", async () => {
-      await user.type(yearInput, "1800")
+    it("should display 'Please enter a year after 1900.' on year below 1900", async () => {
+      await user.type(yearInput, "1899")
       await submit()
       await expectError(yearInput, "Please enter a year after 1900.")
     })
 
-    it("should display over maximum error on year in the future", async () => {
-      await user.type(yearInput, "10000")
+    it("should display 'Please enter a year in the past.' on year in the future", async () => {
+      await user.type(yearInput, (new Date().getFullYear() + 1).toString())
       await submit()
       await expectError(yearInput, "Please enter a year in the past.")
     })
   })
 
   describe("Invalid make", () => {
-    it("should display required error on unselected make", async () => {
+    it("should display 'Please select a make.' on unselected make", async () => {
       await fillOutForm("Make:")
       await submit()
       await expectError(screen.getByLabelText("Make:"), "Please select a make.")
@@ -49,7 +56,7 @@ describe("Invalid vehicle information", () => {
   })
 
   describe("Invalid model", () => {
-    it("should display required error on blank model", async () => {
+    it("should display 'Please enter a model.' on blank model", async () => {
       await fillOutForm("Model:")
       await submit()
       await expectError(

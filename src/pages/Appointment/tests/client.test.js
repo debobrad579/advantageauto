@@ -5,11 +5,10 @@ import { fillOutForm, expectError, submit, renderPage, user } from "./utils"
 describe("Invalid client information", () => {
   beforeEach(async () => {
     renderPage()
-    await screen.findByText("Submit")
   })
 
   describe("Invalid name", () => {
-    it("should display required error on blank name", async () => {
+    it("should display 'Please enter a name.' on blank name", async () => {
       await fillOutForm("Name:")
       await submit()
       await expectError(screen.getByLabelText("Name:"), "Please enter a name.")
@@ -17,7 +16,7 @@ describe("Invalid client information", () => {
   })
 
   describe("Invalid phone", () => {
-    it("should display required error on blank phone", async () => {
+    it("should display 'Please enter a phone number.' on blank phone", async () => {
       await fillOutForm("Phone:")
       await submit()
       await expectError(
@@ -31,25 +30,36 @@ describe("Invalid client information", () => {
     let emailInput
 
     beforeEach(async () => {
-      emailInput = screen.getByLabelText("Email:")
       await fillOutForm("Email:")
+      emailInput = screen.getByLabelText("Email:")
     })
 
-    it("should display required error on blank email", async () => {
+    it("should display 'Please enter an email address.' on blank email", async () => {
       await submit()
       await expectError(emailInput, "Please enter an email address.")
     })
 
-    it("should display invalid email error on invalid email", async () => {
-      await user.type(emailInput, "test")
-      await submit()
-      await expectError(emailInput, "Please enter a valid email address.")
+    describe("should display 'Please enter a valid email address.' for...", () => {
+      const emails = [
+        "missing.domain",
+        "missing.toplevel@domain",
+        "space.in@ email.com",
+        "missingatdomain.com",
+        "@missingusername.com",
+        "domain.too@short.c",
+        "double..dot@example.com",
+        "multiple@at@signs.com",
+        "invalid@special^chars.com",
+        "email@example. com",
+      ]
 
-      await user.type(emailInput, "@example")
-      await expectError(emailInput, "Please enter a valid email address.")
-
-      await user.type(emailInput, ".c")
-      await expectError(emailInput, "Please enter a valid email address.")
+      emails.forEach(email => {
+        it(email, async () => {
+          await user.type(emailInput, email)
+          await submit()
+          await expectError(emailInput, "Please enter a valid email address.")
+        })
+      })
     })
   })
 })

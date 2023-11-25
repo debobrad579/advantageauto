@@ -1,15 +1,21 @@
 import { beforeEach, describe, it } from "vitest"
 import { screen } from "@testing-library/react"
-import { fillOutForm, expectError, submit, renderPage, user } from "./utils"
+import {
+  fillOutForm,
+  expectError,
+  submit,
+  renderPage,
+  user,
+  getCloseDay,
+} from "./utils"
 
 describe("Invalid service information", () => {
   beforeEach(async () => {
     renderPage()
-    await screen.findByText("Submit")
   })
 
   describe("Invalid services", () => {
-    it("should display required error on no selected services", async () => {
+    it("should display 'Please select a service.' on unselected first service", async () => {
       await fillOutForm("Services:")
       await submit()
       await expectError(
@@ -23,19 +29,39 @@ describe("Invalid service information", () => {
     let dateInput
 
     beforeEach(async () => {
-      dateInput = screen.getByLabelText("Date:")
       await fillOutForm("Date:")
+      dateInput = screen.getByLabelText("Date:")
     })
 
-    it("should display required error on blank date", async () => {
+    it("should display 'Please select a date.' on blank date", async () => {
       await submit()
       await expectError(dateInput, "Please select a date.")
     })
 
-    it("should display only weekdays error on weekend date", async () => {
-      await user.type(dateInput, "2023-09-17")
+    it("should display 'Please select a date in the future.' on past date", async () => {
+      await user.type(dateInput, "2022-11-23")
       await submit()
-      await expectError(dateInput, "Please select a weekday.")
+      await expectError(dateInput, "Please select a date in the future.")
+    })
+
+    it("should display 'Please select a date within a year.' on date more than a year in the future", async () => {
+      await user.type(dateInput, "2123-09-16")
+      await submit()
+      await expectError(dateInput, "Please select a date within a year.")
+    })
+
+    describe("should display 'Please select a weekday.' on...", () => {
+      it("Saturday", async () => {
+        await user.type(dateInput, getCloseDay("Saturday"))
+        await submit()
+        await expectError(dateInput, "Please select a weekday.")
+      })
+
+      it("Sunday", async () => {
+        await user.type(dateInput, getCloseDay("Sunday"))
+        await submit()
+        await expectError(dateInput, "Please select a weekday.")
+      })
     })
   })
 
@@ -43,34 +69,38 @@ describe("Invalid service information", () => {
     let timeInput
 
     beforeEach(async () => {
-      timeInput = screen.getByLabelText("Time:")
       await fillOutForm("Time:")
+      timeInput = screen.getByLabelText("Time:")
     })
 
-    it("should display required error on blank time", async () => {
+    it("should display 'Please select a time.' on blank time", async () => {
       await submit()
       await expectError(timeInput, "Please select a time.")
     })
 
-    it("should display only open hours error on time during closed hours (Mon - Thu)", async () => {
-      await user.type(timeInput, "07:30")
-      await submit()
-      await expectError(
-        timeInput,
-        "Please select a time between 8:00 AM and 5:00 PM."
-      )
+    describe("should display 'Please select a time between 8:00 AM and 5:00 PM.' on time...", () => {
+      it("before 8:00 AM", async () => {
+        await user.type(timeInput, "07:30")
+        await submit()
+        await expectError(
+          timeInput,
+          "Please select a time between 8:00 AM and 5:00 PM."
+        )
+      })
 
-      await user.clear(timeInput)
-      await user.type(timeInput, "17:30")
-      await expectError(
-        timeInput,
-        "Please select a time between 8:00 AM and 5:00 PM."
-      )
+      it("after 5:00 PM", async () => {
+        await user.type(timeInput, "17:30")
+        await submit()
+        await expectError(
+          timeInput,
+          "Please select a time between 8:00 AM and 5:00 PM."
+        )
+      })
     })
 
-    it("should display only open hours error on time during closed hours (Fri)", async () => {
+    it("should display 'Please select a time before 1:30 PM on Fridays.' on time after 1:30 PM on a Friday", async () => {
       await user.clear(screen.getByLabelText("Date:"))
-      await user.type(screen.getByLabelText("Date:"), "2023-11-24")
+      await user.type(screen.getByLabelText("Date:"), getCloseDay("Friday"))
       await user.clear(timeInput)
       await user.type(timeInput, "14:00")
       await submit()

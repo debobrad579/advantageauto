@@ -18,7 +18,7 @@ export function Modal({ error }) {
   }, [])
 
   useEffect(() => {
-    if (error?.success) setIsOpen(true)
+    if (error?.success != null) setIsOpen(true)
   }, [error])
 
   return createPortal(
