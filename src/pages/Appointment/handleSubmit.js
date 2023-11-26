@@ -26,7 +26,10 @@ export async function handleSubmit(request) {
 
       return { success: true }
     })
-    .catch(() => {
-      return { success: false }
+    .catch(e => {
+      return {
+        success: false,
+        status: e instanceof TypeError ? 500 : e.message,
+      }
     })
 }

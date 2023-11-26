@@ -41,7 +41,7 @@ export function Modal({ error }) {
           <p>
             {error?.success
               ? "Request Submitted Successfully"
-              : "Request Submission Failed"}
+              : `Request Submission Failed (${error.status})`}
           </p>
           <button className="button" onClick={() => setIsOpen(false)} autoFocus>
             Close

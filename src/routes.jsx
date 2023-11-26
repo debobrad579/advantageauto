@@ -14,21 +14,27 @@ export const routes = [
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <Navigate to="home" /> },
       { path: "*", element: <h1>404 - Page not found.</h1> },
-      { path: "home", element: <Home /> },
-      { path: "who-we-are", element: <WhoWeAre /> },
-      { path: "staff", element: <Staff /> },
-      { path: "services-offered", element: <ServicesOffered /> },
-      { path: "buying-a-used-car", element: <UsedCar /> },
-      { path: "vehicles-to-avoid", element: <VehiclesToAvoid /> },
       {
-        path: "appointment-request",
-        element: <Appointment />,
-        action: async ({ request }) =>
-          await import("pages/Appointment/handleSubmit").then(module =>
-            module.handleSubmit(request)
-          ),
+        path: "/",
+        errorElement: <h1>500 - Internal server error.</h1>,
+        children: [
+          { index: true, element: <Navigate to="home" /> },
+          { path: "home", element: <Home /> },
+          { path: "who-we-are", element: <WhoWeAre /> },
+          { path: "staff", element: <Staff /> },
+          { path: "services-offered", element: <ServicesOffered /> },
+          { path: "buying-a-used-car", element: <UsedCar /> },
+          { path: "vehicles-to-avoid", element: <VehiclesToAvoid /> },
+          {
+            path: "appointment-request",
+            element: <Appointment />,
+            action: async ({ request }) =>
+              await import("pages/Appointment/handleSubmit").then(module =>
+                module.handleSubmit(request)
+              ),
+          },
+        ],
       },
     ],
   },
