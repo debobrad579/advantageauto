@@ -20,11 +20,11 @@ export async function handleSubmit(request) {
     .then(res => {
       track("Submit Appointment Request", { status: res.status })
 
-      if (!res.ok) {
-        throw new Error(res.status)
+      if (res.ok) {
+        return { success: true }
       }
 
-      return { success: true }
+      throw new Error(res.status)
     })
     .catch(e => {
       return {

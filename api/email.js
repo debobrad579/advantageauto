@@ -2,13 +2,12 @@ import { createTransport } from "nodemailer"
 import { catchErrors } from "../src/pages/Appointment/catchErrors.js"
 
 export default function handler(request, response) {
-  if (request.method != "POST")
-    return response.status(405).json({ message: "Method not allowed." })
+  if (request.method != "POST") return response.status(405).end()
 
   const data = request.body
 
   const error = catchErrors(data)
-  if (error) return response.status(400).json({ message: error })
+  if (error) return response.status(400).end()
 
   const transporter = createTransport({
     service: "gmail",
@@ -74,9 +73,7 @@ ${data.additional}
   }
 
   return transporter.sendMail(mailOptions, error =>
-    error
-      ? response.status(500).json({ message: "Internal server error." })
-      : response.status(200).json({ message: "Successful submission." })
+    error ? response.status(500).end() : response.status(204).end()
   )
 }
 
