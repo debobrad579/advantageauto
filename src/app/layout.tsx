@@ -5,7 +5,6 @@ import "@/css/globals.css"
 import "@/css/layout.css"
 import { Footer } from "./Footer"
 import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const notoSans = Noto_Sans({ subsets: ["latin"] })
 
@@ -29,7 +28,6 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   )
