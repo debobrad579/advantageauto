@@ -1,0 +1,197 @@
+:root {
+  --side-margin: 5vw;
+  --animation-timing: 400ms ease-in-out;
+
+  @media (max-width: 830px) {
+    & {
+      --side-margin: 25px;
+    }
+  }
+}
+
+nav {
+  --bar-width: 60px;
+  --bar-height: 6px;
+  --bar-gap: 8px;
+  --foreground: hsl(210, 11%, 15%);
+  --background: white;
+  --hamburger-margin: 8px;
+  --animation-timing: 300ms ease-in-out;
+  --hamburger-height: calc(var(--bar-height) * 3 + var(--bar-gap) * 2);
+
+  background-color: var(--foreground);
+  height: 85px;
+  max-height: 85px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 var(--side-margin) 0 var(--side-margin);
+  z-index: 1;
+
+  & > a {
+    outline-offset: -6px;
+  }
+
+  & .logo-container {
+    position: relative;
+    max-width: 190px;
+    width: calc(100vw - 150px);
+    height: 85px;
+    margin: 0 5px;
+    z-index: 2;
+
+    & > img {
+      object-fit: contain;
+    }
+  }
+
+  /* Hamburger Menu */
+  & > label {
+    --x-width: calc(var(--hamburger-height) * 1.41421356237);
+    --background-color: var(--grey);
+
+    display: none;
+    flex-direction: column;
+    gap: var(--bar-gap);
+    width: max-content;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+
+    &:hover {
+      --background-color: var(--light-grey);
+    }
+
+    &:has(input:focus-visible)::before,
+    & > input:focus-visible,
+    &:has(input:focus-visible)::after {
+      border: 2px solid var(--foreground);
+      box-shadow: 0 0 0 1px white;
+    }
+
+    & > input {
+      appearance: none;
+      padding: 0;
+      margin: 0;
+      outline: none;
+      pointer-events: none;
+    }
+
+    &::before,
+    & > input,
+    &::after {
+      content: "";
+      width: var(--bar-width);
+      height: var(--bar-height);
+      background-color: var(--background-color);
+      border-radius: 2718px;
+      transform-origin: left center;
+      transition: opacity var(--animation-timing), width var(--animation-timing),
+        rotate var(--animation-timing), translate var(--animation-timing),
+        background-color var(--animation-timing);
+    }
+
+    &:has(input:checked) {
+      --background-color: white;
+
+      &::before {
+        rotate: 45deg;
+        width: var(--x-width);
+        translate: 0 calc(var(--bar-height) / -2);
+      }
+
+      & > input {
+        opacity: 0;
+        width: 0;
+      }
+
+      &::after {
+        rotate: -45deg;
+        width: var(--x-width);
+        translate: 0 calc(var(--bar-height) / 2);
+      }
+    }
+
+    @media (max-width: 1150px) {
+      & {
+        display: flex;
+      }
+
+      &:has(input:checked) + ul {
+        translate: 0;
+      }
+    }
+  }
+
+  /* Navbar Links */
+  & > ul {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    list-style: none;
+    gap: 16px;
+    background-color: var(--foreground);
+    translate: 0 -320px;
+    transform: translate(0, 320px);
+
+    & > li {
+      margin-bottom: 0;
+
+      & > a {
+        text-decoration: none;
+        transition: color var(--animation-timing);
+        color: var(--grey);
+
+        &:hover {
+          color: var(--light-grey);
+        }
+
+        &.active {
+          color: white;
+        }
+      }
+    }
+
+    @media (max-width: 1150px) {
+      & {
+        flex-direction: column;
+        width: 100vw;
+        margin: 0 calc(var(--side-margin) * -1);
+        padding: 16px 0;
+        transform: none;
+        transition: translate var(--animation-timing);
+      }
+    }
+  }
+}
+
+main {
+  margin: 110px var(--side-margin) 90px var(--side-margin);
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  padding: 24px;
+  color: white;
+  background-color: var(--dark-grey);
+  height: 65px;
+  z-index: 1;
+
+  @media (max-width: 400px) {
+    & {
+      flex-direction: column;
+      gap: 8px;
+      height: 85px;
+    }
+  }
+}
