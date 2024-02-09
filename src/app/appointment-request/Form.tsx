@@ -11,6 +11,7 @@ import { checkForError } from "./errors"
 import { useState } from "react"
 import type { FormError, FormInput } from "./types"
 import { InputGroup } from "./_components/InputGroup"
+import { track } from "@vercel/analytics"
 
 export function Form() {
   const [state, action] = useFormState(sendEmail, { status: "Not Submitted" })
@@ -30,6 +31,7 @@ export function Form() {
         action={async formData => {
           const error = checkForError(formData)
           if (error) return setError(error)
+          track("Submit Form Successfully")
           setError(undefined)
           action(formData)
         }}
