@@ -48,12 +48,17 @@ export async function sendEmail(
   }
 
   let formState: FormState = {
-    status: "Success",
+    status: "Server Error",
   }
 
-  transporter.sendMail(mailOptions, error => {
-    if (error != null) formState = { status: "Server Error" }
-  })
+  await transporter
+    .sendMail(mailOptions)
+    .then(() => {
+      formState = { status: "Success" }
+    })
+    .catch(error => {
+      console.error(error)
+    })
 
   return formState
 }
