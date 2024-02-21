@@ -1,20 +1,18 @@
-.form-group {
-  & > h3 {
-    margin-top: auto;
-  }
+.input-group-subtitle {
+  margin-top: 0;
+}
 
-  & > div:has(> *:nth-child(2)) {
-    display: grid;
-    grid-row-gap: 4px;
-    grid-template-columns: 100px auto;
-  }
+.input-group-fields:has(> *:nth-child(2)) {
+  display: grid;
+  grid-row-gap: 4px;
+  grid-template-columns: 100px auto;
 }
 
 label.error {
   color: hsl(345, 100%, 40%);
 }
 
-.input-field {
+.input {
   width: 100%;
   max-width: 100%;
   height: 25px;
@@ -23,18 +21,18 @@ label.error {
   scroll-margin: 112px;
   outline: none;
   background-color: white;
+}
 
-  &:focus {
-    box-shadow: 0 0 3px 0 var(--dark-grey);
-  }
+.input:focus {
+  box-shadow: 0 0 3px 0 var(--dark-grey);
+}
 
-  &.error {
-    border: 1px solid hsl(345, 100%, 40%);
+.input.error {
+  border: 1px solid hsl(345, 100%, 40%);
+}
 
-    &:focus {
-      box-shadow: 0 0 3px 0 hsl(345, 100%, 40%);
-    }
-  }
+.input.error:focus {
+  box-shadow: 0 0 3px 0 var(--dark-grey);
 }
 
 .textarea {
@@ -53,24 +51,24 @@ label.error {
   padding: 7px 11px 4px;
   margin-top: 8px;
   position: absolute;
+}
 
-  &::after,
-  &::before {
-    content: "";
-    border: 7px solid transparent;
-    position: absolute;
-    left: 11px;
-  }
+.error-popup::before,
+.error-popup::after {
+  content: "";
+  border: 7px solid transparent;
+  position: absolute;
+  left: 11px;
+}
 
-  &::after {
-    border-bottom: 7px solid hsl(0, 80%, 94%);
-    top: -13px;
-  }
+.error-popup::before {
+  border-bottom: 7px solid hsl(358, 100%, 70%);
+  top: -14px;
+}
 
-  &::before {
-    border-bottom: 7px solid hsl(358, 100%, 70%);
-    top: -14px;
-  }
+.error-popup::after {
+  border-bottom: 7px solid hsl(0, 80%, 94%);
+  top: -13px;
 }
 
 .form-buttons {
@@ -78,19 +76,14 @@ label.error {
   justify-content: center;
   gap: 5px;
   margin-top: 16px;
-
-  & > input {
-    width: 370px;
-
-    @media (max-width: 830px) {
-      & {
-        width: 100%;
-      }
-    }
-  }
 }
 
-.button {
+.form-buttons > input {
+  max-width: 370px;
+  width: 100%;
+}
+
+.btn {
   font-family: inherit;
   outline: none;
   cursor: pointer;
@@ -98,40 +91,39 @@ label.error {
   border: 1px solid var(--grey);
   padding: 0.5em 1em;
   border-radius: 0.3em;
+}
 
-  &:hover {
-    background-color: hsl(0, 0%, 75%);
-  }
+.btn:hover {
+  background-color: hsl(0, 0%, 75%);
+}
 
-  &:focus {
-    outline: 1px solid hsl(0, 0%, 15%);
-  }
+.btn:focus {
+  outline: 1px solid hsl(0, 0%, 15%);
+}
 
-  &:active {
-    background-color: hsl(0, 0%, 70%);
-  }
+.btn:active {
+  background-color: hsl(0, 0%, 70%);
+}
 
-  &:disabled,
-  &[disabled] {
-    background-color: hsl(0, 0%, 85%);
-    cursor: not-allowed;
-  }
+.btn[disabled] {
+  background-color: hsl(0, 0%, 85%);
+  cursor: not-allowed;
 }
 
 .modal {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.1);
+}
 
-  & > div {
-    position: fixed;
-    border-radius: 1em;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    padding: 16px;
-    background-color: white;
-    border: 2px solid black;
-    text-align: center;
-  }
+.modal > div {
+  position: fixed;
+  border-radius: 1em;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  padding: 16px;
+  background-color: white;
+  border: 2px solid black;
+  text-align: center;
 }

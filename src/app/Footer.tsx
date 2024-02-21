@@ -1,8 +1,8 @@
 export function Footer() {
   return (
-    <footer>
+    <footer className="footer">
       <div>&copy; Advantage Auto</div>
       <div>All rights reserved.</div>
     </footer>
-  )
+  );
 }

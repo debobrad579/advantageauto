@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { ComponentProps, useId, useRef } from "react"
-import { useErrorHandling } from "../useErrorHandling"
-import type { FormError } from "../types"
+import { ComponentProps, useId, useRef } from "react";
+import { useErrorHandling } from "../useErrorHandling";
+import type { FormError } from "../types";
 
 type SelectProps = {
-  labelText: string
-  options: string[]
-  placeholder: string
-  error?: FormError
-} & ComponentProps<"select">
+  labelText: string;
+  options: string[];
+  placeholder: string;
+  error?: FormError;
+} & ComponentProps<"select">;
 
 export function Select({
   labelText,
@@ -18,10 +18,10 @@ export function Select({
   error,
   ...props
 }: SelectProps) {
-  const id = useId()
-  const selectRef = useRef<HTMLSelectElement>(null)
+  const id = useId();
+  const selectRef = useRef<HTMLSelectElement>(null);
   const { showError, showErrorPopup, handleChange, handleBlur, handleFocus } =
-    useErrorHandling(selectRef, error)
+    useErrorHandling(selectRef, error);
 
   return (
     <>
@@ -32,7 +32,7 @@ export function Select({
         <select
           id={id}
           ref={selectRef}
-          className={`input-field ${showError ? "error" : ""}`}
+          className={`input ${showError ? "error" : ""}`}
           defaultValue="0"
           onChange={handleChange}
           onBlur={handleBlur}
@@ -42,13 +42,13 @@ export function Select({
           <option value="0" hidden>
             {placeholder}
           </option>
-          {options.map(option => {
-            const value = option.replace(" ", "_")
+          {options.map((option) => {
+            const value = option.replace(" ", "_");
             return (
               <option key={value} value={value}>
                 {option}
               </option>
-            )
+            );
           })}
         </select>
         {error != null && showError && showErrorPopup && (
@@ -56,5 +56,5 @@ export function Select({
         )}
       </div>
     </>
-  )
+  );
 }

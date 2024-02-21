@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { createPortal } from "react-dom"
-import type { FormState } from "../types"
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import type { FormState } from "../types";
 
 export function Modal({ formState }: { formState: FormState }) {
-  const modalRef = useRef<HTMLDivElement>(null)
-  const [isOpen, setIsOpen] = useState(false)
-  const [isMounted, setIsMounted] = useState(false)
+  const modalRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     function keyboardHandler(e: KeyboardEvent) {
-      if (e.key === "Escape") setIsOpen(false)
+      if (e.key === "Escape") setIsOpen(false);
     }
 
     function mouseHandler(e: MouseEvent) {
-      if (modalRef.current == null) return
+      if (modalRef.current == null) return;
 
-      const modalDimentions = modalRef.current.getBoundingClientRect()
+      const modalDimentions = modalRef.current.getBoundingClientRect();
 
       if (
         e.clientX <= modalDimentions.left ||
@@ -25,23 +25,23 @@ export function Modal({ formState }: { formState: FormState }) {
         e.clientY <= modalDimentions.top ||
         e.clientY >= modalDimentions.bottom
       )
-        setIsOpen(false)
+        setIsOpen(false);
     }
 
-    document.addEventListener("keydown", keyboardHandler)
-    document.addEventListener("click", mouseHandler)
-    setIsMounted(true)
+    document.addEventListener("keydown", keyboardHandler);
+    document.addEventListener("click", mouseHandler);
+    setIsMounted(true);
 
     return () => {
-      document.removeEventListener("keydown", keyboardHandler)
-      document.removeEventListener("click", mouseHandler)
-    }
-  }, [])
+      document.removeEventListener("keydown", keyboardHandler);
+      document.removeEventListener("click", mouseHandler);
+    };
+  }, []);
 
   useEffect(() => {
     if (formState.status === "Success" || formState.status === "Server Error")
-      setIsOpen(true)
-  }, [formState])
+      setIsOpen(true);
+  }, [formState]);
 
   return (
     isMounted &&
@@ -54,11 +54,7 @@ export function Modal({ formState }: { formState: FormState }) {
                 ? "Request Submitted Successfully"
                 : `Request Submission Failed`}
             </h2>
-            <button
-              className="button"
-              onClick={() => setIsOpen(false)}
-              autoFocus
-            >
+            <button className="btn" onClick={() => setIsOpen(false)} autoFocus>
               Close
             </button>
           </div>
@@ -66,5 +62,5 @@ export function Modal({ formState }: { formState: FormState }) {
       ),
       document.getElementById("modal-container")!
     )
-  )
+  );
 }

@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import { ComponentProps, useId, useRef } from "react"
-import { useErrorHandling } from "../useErrorHandling"
-import type { FormError } from "../types"
+import { ComponentProps, useId, useRef } from "react";
+import { useErrorHandling } from "../useErrorHandling";
+import type { FormError } from "../types";
 
 type InputProps = {
-  labelText: string
-  error?: FormError
-} & ComponentProps<"input">
+  labelText: string;
+  error?: FormError;
+} & ComponentProps<"input">;
 
 export function Input({ labelText, error, ...props }: InputProps) {
-  const id = useId()
-  const inputRef = useRef<HTMLInputElement>(null)
+  const id = useId();
+  const inputRef = useRef<HTMLInputElement>(null);
   const { showError, showErrorPopup, handleChange, handleBlur, handleFocus } =
-    useErrorHandling(inputRef, error)
+    useErrorHandling(inputRef, error);
 
   return (
     <>
@@ -24,7 +24,7 @@ export function Input({ labelText, error, ...props }: InputProps) {
         <input
           id={id}
           ref={inputRef}
-          className={`input-field ${showError ? "error" : ""}`}
+          className={`input ${showError ? "error" : ""}`}
           onChange={handleChange}
           onBlur={handleBlur}
           onFocus={handleFocus}
@@ -35,5 +35,5 @@ export function Input({ labelText, error, ...props }: InputProps) {
         )}
       </div>
     </>
-  )
+  );
 }

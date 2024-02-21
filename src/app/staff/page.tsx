@@ -1,16 +1,16 @@
-import type { Metadata } from "next"
-import owen from "@/img/owen.jpg"
-import stuart from "@/img/stuart.jpg"
-import ryan from "@/img/ryan.jpg"
-import william from "@/img/william.jpg"
-import cody from "@/img/cody.jpg"
-import { Photo } from "@/components/Photo"
+import type { Metadata } from "next";
+import owen from "@/img/owen.jpg";
+import stuart from "@/img/stuart.jpg";
+import ryan from "@/img/ryan.jpg";
+import william from "@/img/william.jpg";
+import cody from "@/img/cody.jpg";
+import { Photo } from "@/components/Photo";
 
 export const metadata: Metadata = {
   title: "Staff",
   description:
     "Meet our staff who have been working here reliably fo many years.",
-}
+};
 
 export default function Staff() {
   return (
@@ -47,5 +47,5 @@ export default function Staff() {
         </p>
       </div>
     </>
-  )
+  );
 }

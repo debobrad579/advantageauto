@@ -1,80 +1,59 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
-import logo from "@/img/logo.png"
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
+import logo from "@/img/logo.png";
 
 export function Navbar() {
-  const hamburgerRef = useRef<HTMLInputElement>(null)
-  const [linkTabIndex, setLinkTabIndex] = useState<-1 | 0>(0)
-  const pathname = usePathname()
+  const hamburgerRef = useRef<HTMLInputElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (hamburgerRef.current != null) hamburgerRef.current.checked = false
-  }, [pathname])
+    if (hamburgerRef.current != null) hamburgerRef.current.checked = false;
+  }, [pathname]);
 
   useEffect(() => {
-    determineLinkTabIndex()
-
     const handleResize = () => {
-      determineLinkTabIndex()
+      if (hamburgerRef.current != null && window.innerWidth > 1170)
+        hamburgerRef.current.checked = false;
+    };
 
-      if (hamburgerRef.current != null && window.innerWidth > 1150)
-        hamburgerRef.current.checked = false
-    }
-
-    window.addEventListener("resize", handleResize)
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [])
-
-  function determineLinkTabIndex() {
-    if (window.innerWidth > 1150 || hamburgerRef.current?.checked)
-      setLinkTabIndex(0)
-    else setLinkTabIndex(-1)
-  }
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
-    <nav>
+    <nav className="navbar">
       <Link href="/">
         <div className="logo-container">
           <Image src={logo} alt="Advantage Auto" sizes="190px" fill />
         </div>
       </Link>
       <label className="hamburger-menu">
-        <input
-          ref={hamburgerRef}
-          type="checkbox"
-          onClick={() => determineLinkTabIndex()}
-        />
+        <input ref={hamburgerRef} type="checkbox" />
       </label>
-      <ul>
+      <ul className="navbar-links">
         <li>
           <Link
             href="who-we-are"
-            tabIndex={linkTabIndex}
             className={pathname === "/who-we-are" ? "active" : ""}
           >
             Who We Are
           </Link>
         </li>
         <li>
-          <Link
-            href="staff"
-            tabIndex={linkTabIndex}
-            className={pathname === "/staff" ? "active" : ""}
-          >
+          <Link href="staff" className={pathname === "/staff" ? "active" : ""}>
             Staff
           </Link>
         </li>
         <li>
           <Link
             href="services-offered"
-            tabIndex={linkTabIndex}
             className={pathname === "/services-offered" ? "active" : ""}
           >
             Services Offered
@@ -83,7 +62,6 @@ export function Navbar() {
         <li>
           <Link
             href="buying-a-used-car"
-            tabIndex={linkTabIndex}
             className={pathname === "/buying-a-used-car" ? "active" : ""}
           >
             Buying a Used Car?
@@ -92,7 +70,6 @@ export function Navbar() {
         <li>
           <Link
             href="vehicles-to-avoid"
-            tabIndex={linkTabIndex}
             className={pathname === "/vehicles-to-avoid" ? "active" : ""}
           >
             Vehicles to Avoid
@@ -101,7 +78,6 @@ export function Navbar() {
         <li>
           <Link
             href="appointment-request"
-            tabIndex={linkTabIndex}
             className={pathname === "/appointment-request" ? "active" : ""}
           >
             Appointment Request
@@ -109,5 +85,5 @@ export function Navbar() {
         </li>
       </ul>
     </nav>
-  )
+  );
 }
