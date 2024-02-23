@@ -8,6 +8,7 @@ export type FormInput =
   | "make"
   | "model"
   | "service1"
+  | "services"
   | "date"
   | "time"
 

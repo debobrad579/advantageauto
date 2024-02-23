@@ -1,9 +1,10 @@
 import { RefObject, useEffect, useState } from "react"
 import { ERROR_PREDICATES } from "./errors"
 import type { FormError } from "./types"
+import { SelectInstance } from "react-select"
 
 export function useErrorHandling(
-  ref: RefObject<HTMLInputElement | HTMLSelectElement>,
+  ref: RefObject<HTMLInputElement | HTMLSelectElement | SelectInstance>,
   error?: FormError
 ) {
   const [showError, setShowError] = useState(false)
@@ -23,7 +24,10 @@ export function useErrorHandling(
   function handleChange() {
     if (ref.current == null || error == null) return
 
-    if (ERROR_PREDICATES[error.predicate](ref.current.value))
+    if (
+      ref.current instanceof HTMLInputElement &&
+      ERROR_PREDICATES[error.predicate](ref.current.value)
+    )
       return setShowError(true)
 
     setShowError(false)

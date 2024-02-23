@@ -29,11 +29,9 @@ export async function sendEmail(
       year={formData.get("year")!.toString()}
       make={formData.get("make")!.toString().replace("_", " ")}
       model={formData.get("model")!.toString()}
-      services={formatServices([
-        formData.get("service1"),
-        formData.get("service2"),
-        formData.get("service3"),
-      ])}
+      services={formatServices(
+        JSON.parse(formData.get("services")!.toString())
+      )}
       date={formatDate(formData.get("date"))!}
       time={formatTime(formData.get("time"))!}
       additional={formData.get("additional")?.toString()}
@@ -56,7 +54,7 @@ export async function sendEmail(
     .then(() => {
       formState = { status: "Success" }
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error)
     })
 
@@ -65,8 +63,8 @@ export async function sendEmail(
 
 function formatServices(services: (FormDataEntryValue | null)[]) {
   return services
-    .filter(i => i != null && i !== "0")
-    .map(i => i!.toString().replace("_", " "))
+    .filter((i) => i != null && i !== "0")
+    .map((i) => i!.toString().replace("_", " "))
     .join(", ")
 }
 

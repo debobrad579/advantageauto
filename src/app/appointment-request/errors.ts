@@ -2,7 +2,9 @@ import { addYears, isAfter, isBefore, isWeekend, parse } from "date-fns"
 import type { FormInput } from "./types"
 
 export const ERROR_PREDICATES = {
-  required: (value: string) => value === "" || value === "0",
+  required: (value: string) => value === "" || value === "[]",
+  validPhone: (value: string) =>
+    !value.match(/^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/),
   validEmail: (value: string) =>
     !value.match(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -38,6 +40,10 @@ export const POSSIBLE_ERRORS: {
     {
       message: "Please enter a phone number.",
       predicate: "required",
+    },
+    {
+      message: "Please enter a valid phone number.",
+      predicate: "validPhone",
     },
   ],
   email: [
@@ -83,6 +89,12 @@ export const POSSIBLE_ERRORS: {
   service1: [
     {
       message: "Please select a service.",
+      predicate: "required",
+    },
+  ],
+  services: [
+    {
+      message: "Please select at least one service.",
       predicate: "required",
     },
   ],

@@ -1,19 +1,18 @@
-"use client";
+"use client"
 
-import { useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom"
 
 export function ButtonGroup() {
-  const { pending } = useFormStatus();
+  const { pending } = useFormStatus()
 
   return (
-    <div className="form-buttons">
-      <input
-        className="btn"
+    <div className="form-btn-group">
+      <button
+        className={`btn ${pending ? "btn-submitting" : ""}`}
         type="submit"
-        value={pending ? "Submitting..." : "Submit"}
         disabled={pending}
-      />
-      <input className="btn" type="reset" value="Reset" disabled={pending} />
+      >{pending ? "Submitting" : "Submit"}</button>
+      <button className="btn" type="reset" disabled={pending}>Reset</button>
     </div>
-  );
+  )
 }

@@ -1,31 +1,18 @@
-"use client";
+"use client"
 
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
-import logo from "@/img/logo.png";
+import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { useEffect, useRef } from "react"
+import logo from "@/img/logo.png"
 
 export function Navbar() {
-  const hamburgerRef = useRef<HTMLInputElement>(null);
-  const pathname = usePathname();
+  const hamburgerRef = useRef<HTMLInputElement>(null)
+  const pathname = usePathname()
 
   useEffect(() => {
-    if (hamburgerRef.current != null) hamburgerRef.current.checked = false;
-  }, [pathname]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (hamburgerRef.current != null && window.innerWidth > 1170)
-        hamburgerRef.current.checked = false;
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+    if (hamburgerRef.current != null) hamburgerRef.current.checked = false
+  }, [pathname])
 
   return (
     <nav className="navbar">
@@ -85,5 +72,5 @@ export function Navbar() {
         </li>
       </ul>
     </nav>
-  );
+  )
 }
