@@ -33,6 +33,7 @@ export function Form() {
         noValidate
         action={async (formData) => {
           const error = checkForError(formData)
+          console.log(error, formData.get("services"))
           if (error) return setError(error)
           track("Submit Appointment Request")
           setError(undefined)

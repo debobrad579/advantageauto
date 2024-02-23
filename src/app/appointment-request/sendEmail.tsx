@@ -32,8 +32,8 @@ export async function sendEmail(
       services={formatServices(
         JSON.parse(formData.get("services")!.toString())
       )}
-      date={formatDate(formData.get("date"))!}
-      time={formatTime(formData.get("time"))!}
+      date={formatDate(formData.get("date")!)}
+      time={formatTime(formData.get("time")!)}
       additional={formData.get("additional")?.toString()}
     />
   )
@@ -61,15 +61,11 @@ export async function sendEmail(
   return formState
 }
 
-function formatServices(services: (FormDataEntryValue | null)[]) {
-  return services
-    .filter((i) => i != null && i !== "0")
-    .map((i) => i!.toString().replace("_", " "))
-    .join(", ")
+function formatServices(services: FormDataEntryValue[]) {
+  return services.map((i) => i.toString().replace(/_/g, " ")).join(", ")
 }
 
-function formatDate(date: FormDataEntryValue | null) {
-  if (date == null) return
+function formatDate(date: FormDataEntryValue) {
   const [year, month, day] = date.toString().split("-").map(Number)
   const monthNames = [
     "January",
@@ -88,8 +84,7 @@ function formatDate(date: FormDataEntryValue | null) {
   return `${monthNames[month - 1]} ${day}, ${year}`
 }
 
-function formatTime(time: FormDataEntryValue | null) {
-  if (time == null) return
+function formatTime(time: FormDataEntryValue) {
   const [hour, minute] = time.toString().split(":").map(Number)
   return `${hour % 12 !== 0 ? hour % 12 : 12}:${minute
     .toString()

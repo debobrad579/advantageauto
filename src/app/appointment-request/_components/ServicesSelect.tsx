@@ -96,9 +96,8 @@ export function ServicesSelect({ error }: { error?: FormError }) {
         <input
           hidden
           name="services"
-          defaultValue={JSON.stringify(
-            selectedOptions.map((option) => option.value)
-          )}
+          value={JSON.stringify(selectedOptions.map((option) => option.value))}
+          onChange={() => undefined}
         />
       </div>
     </div>
