@@ -141,7 +141,7 @@
 .textarea {
   flex-grow: 1;
   resize: none;
-  min-height: 10em;
+  min-height: 8em;
 }
 
 .error-popup {

@@ -25,6 +25,17 @@ const options = [
   { value: "Dripless_undercoating", label: "Dripless undercoating" },
 ]
 
+// type SelectProps = {
+//   options: {
+//     value: string
+//     label: string
+//   }[]
+//   placeholder: string
+//   isMulti?: boolean
+//   isSearchable?: boolean
+//   error?: FormError
+// }
+
 export function ServicesSelect({ error }: { error?: FormError }) {
   const id = useId()
   const selectRef = useRef<SelectInstance>(null)
