@@ -12,8 +12,6 @@ import { useState } from "react"
 import type { FormError, FormInput } from "./types"
 import { FormGroup } from "./_components/FormGroup"
 import { track } from "@vercel/analytics"
-import { MakeSelect } from "./_components/MakeSelect"
-import { ServicesSelect } from "./_components/ServicesSelect"
 
 export function Form() {
   const [state, action] = useFormState(sendEmail, { status: "Not Submitted" })
@@ -53,11 +51,25 @@ export function Form() {
           </FormGroup>
           <FormGroup title="Vehicle Information">
             <Input labelText="Year:" name="year" error={getError("year")} />
-            <MakeSelect error={getError("make")} />
+            <Select
+              labelText="Make:"
+              name="make"
+              placeholder="Select a Make"
+              options={MAKE_OPTIONS}
+              isSearchable
+              error={getError("make")}
+            />
             <Input labelText="Model:" name="model" error={getError("model")} />
           </FormGroup>
           <FormGroup title="Requested Service Information">
-            <ServicesSelect error={getError("services")} />
+            <Select
+              labelText="Services:"
+              name="services"
+              options={SERVICE_OPTIONS}
+              placeholder="Select Requested Services"
+              isMulti
+              error={getError("services")}
+            />
             <Input
               labelText="Date:"
               name="date"

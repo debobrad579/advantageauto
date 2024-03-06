@@ -11,8 +11,12 @@ export function ButtonGroup() {
         className={`btn ${pending ? "btn-submitting" : ""}`}
         type="submit"
         disabled={pending}
-      >{pending ? "Submitting" : "Submit"}</button>
-      <button className="btn" type="reset" disabled={pending}>Reset</button>
+      >
+        {pending ? "Submitting" : "Submit"}
+      </button>
+      <button className="btn" type="reset" disabled={pending}>
+        Reset
+      </button>
     </div>
   )
 }

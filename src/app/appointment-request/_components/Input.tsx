@@ -1,8 +1,8 @@
 "use client"
 
-import { ComponentProps, useId, useRef } from "react"
-import { useErrorHandling } from "../useErrorHandling"
+import { ComponentProps, useEffect, useId, useRef, useState } from "react"
 import type { FormError } from "../types"
+import { ERROR_PREDICATES } from "../errors"
 
 type InputProps = {
   labelText: string
@@ -11,9 +11,18 @@ type InputProps = {
 
 export function Input({ labelText, error, ...props }: InputProps) {
   const id = useId()
-  const inputRef = useRef<HTMLInputElement>(null)
-  const { showError, showErrorPopup, handleChange, handleBlur, handleFocus } =
-    useErrorHandling(inputRef, error)
+  const ref = useRef<HTMLInputElement>(null)
+  const [showError, setShowError] = useState(false)
+  const [showErrorPopup, setShowErrorPopup] = useState(false)
+
+  useEffect(() => {
+    if (ref.current != null && error != null) {
+      setShowError(true)
+      ref.current.focus()
+    }
+
+    return () => setShowError(false)
+  }, [ref, error])
 
   return (
     <div className="form-input">
@@ -23,11 +32,19 @@ export function Input({ labelText, error, ...props }: InputProps) {
       <div>
         <input
           id={id}
-          ref={inputRef}
+          ref={ref}
           className={`input ${showError ? "error" : ""}`}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
+          onChange={() => {
+            if (
+              ref.current != null &&
+              error != null &&
+              ERROR_PREDICATES[error.predicate](ref.current.value)
+            )
+              return setShowError(true)
+            setShowError(false)
+          }}
+          onBlur={() => setShowErrorPopup(false)}
+          onFocus={() => setShowErrorPopup(true)}
           {...props}
         />
         {error != null && showError && showErrorPopup && (
