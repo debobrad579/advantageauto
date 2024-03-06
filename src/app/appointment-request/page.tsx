@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { Form } from "./Form"
 import "@/css/appointment.css"
-import { MakeSelect } from "./_components/MakeSelect"
 
 export const metadata: Metadata = {
   title: "Appointment Request",
