@@ -40,7 +40,7 @@ export async function sendEmail(
 
   const mailOptions = {
     from: "Advantage Auto Appt.",
-    to: "owen@advantage-auto.ca",
+    to: "office@advantage-auto.ca",
     subject: "Online Appointment Request",
     html: emailHtml,
   }
