@@ -63,6 +63,11 @@ p {
   grid-row-gap: 20px;
 }
 
+.flex-container {
+  display: flex;
+  gap: 2rem;
+}
+
 .home-info {
   display: flex;
   flex-direction: column;
@@ -101,6 +106,10 @@ p {
 @media (max-width: 1000px) {
   .grid-container {
     grid-template-columns: 1fr;
+  }
+
+  .flex-container {
+    display: block;
   }
 }
 
