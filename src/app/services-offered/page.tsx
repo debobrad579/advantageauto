@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { Photo } from "@/components/Photo"
-import car from "@/img/car1"
+import car from "@/img/car1.jpg"
 
 export const metadata: Metadata = {
   title: "Services Offered",
