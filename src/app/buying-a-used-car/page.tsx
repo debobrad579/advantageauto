@@ -57,14 +57,14 @@ export default function BuyingAUsedCar() {
             need to be serviced when the hot weather comes, but it should save
             you from a compressor replacement.
           </li>
+        </ul>
+        <ul>
           <li>
             Carfax reports are good but don't necessarily report all major
             repairs. A car repaired after a collision that is repaired out of
             pocket rather than through insurance will never show up on the
             report.
           </li>
-        </ul>
-        <ul>
           <li>
             Call you insurance company to see what the new rates will be. Some
             cars are considered high risk for either theft or personal injury

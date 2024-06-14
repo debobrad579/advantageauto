@@ -1,4 +1,6 @@
+import { Photo } from "@/components/Photo"
 import type { Metadata } from "next"
+import car from "@/img/car2.jpg"
 
 export const metadata: Metadata = {
   title: "Who We Are",
@@ -66,6 +68,7 @@ export default function WhoWeAre() {
             stressful, and our staff needs and appreciates time off to unwind
             and refresh.
           </p>
+          <Photo src={car} alt="Raised cars" className="raisedCars" />
         </div>
       </div>
     </>
