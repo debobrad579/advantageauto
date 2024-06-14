@@ -68,7 +68,9 @@ export default function WhoWeAre() {
             stressful, and our staff needs and appreciates time off to unwind
             and refresh.
           </p>
-          <Photo src={car} alt="Raised cars" className="raisedCars" />
+          <div className="raised-cars">
+            <Photo src={car} alt="Raised cars" />
+          </div>
         </div>
       </div>
     </>
