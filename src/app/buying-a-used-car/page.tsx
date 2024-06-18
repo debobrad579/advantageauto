@@ -15,7 +15,7 @@ export default function BuyingAUsedCar() {
         culture. Buying a used car can be overwhelming, so here are some tips
         that can save you both time and money:
       </p>
-      <div className="flex-container">
+      <div className="column-container">
         <ul>
           <li>If the deal sounds too good to be true, it usually is.</li>
           <li>

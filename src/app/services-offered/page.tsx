@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 export default function ServicesOffered() {
   return (
-    <div className="grid-container">
-      <div>
+    <div className="flex-container">
+      <div className="half">
         <h1>Services Offered:</h1>
         <p>We offer the following services:</p>
         <ul>
@@ -37,7 +37,13 @@ export default function ServicesOffered() {
           <li>and more</li>
         </ul>
       </div>
-      <Photo src={car} alt="Cody working on a car" sizes="(max-width: 830px) 100vw, 40vw" />
+      <div className="half">
+        <Photo
+          src={car}
+          alt="Cody working on a car"
+          sizes="(max-width: 1000px) 100vw, 40vw"
+        />
+      </div>
     </div>
   )
 }

@@ -15,7 +15,7 @@ export default function VehiclesToAvoid() {
         of constant repairs or have premature major drive train failures.
         Vehicles that we recommend avoiding are the following:
       </p>
-      <div className="flex-container">
+      <div className="column-container">
         <ul>
           <li>
             Any General Motors vehicle 2005 through present with a 2.4 L 4

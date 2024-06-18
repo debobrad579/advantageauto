@@ -10,7 +10,7 @@ export default function WhoWeAre() {
   return (
     <>
       <h1>Who We Are</h1>
-      <div className="flex-container">
+      <div className="column-container">
         <div>
           <p>
             Thanks for taking the time to research our business. Advantage Auto
