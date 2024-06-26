@@ -1,10 +1,9 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useRef } from "react"
-import logo from "@/img/logo.png"
+import Logo from "@/img/logo.svg"
 
 export function Navbar() {
   const hamburgerRef = useRef<HTMLInputElement>(null)
@@ -18,7 +17,7 @@ export function Navbar() {
     <nav className="navbar">
       <Link href="/">
         <div className="logo-container">
-          <Image src={logo} alt="Advantage Auto" sizes="190px" fill />
+          <Logo />
         </div>
       </Link>
       <label className="hamburger-menu">
