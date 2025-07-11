@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import owen from "@/img/owen.jpg"
-import stuart from "@/img/stuart.jpg"
+import amber from "@/img/amber.jpg"
 import ryan from "@/img/ryan.jpg"
 import william from "@/img/william.jpg"
 import cody from "@/img/cody.jpg"
@@ -26,11 +26,10 @@ export default function Staff() {
           </p>
         </div>
         <div className="staff-member">
-          <Photo src={stuart} alt="Stuart Gillanders" />
+          <Photo src={amber} alt="Amber DeBoer" />
           <p>
-            Stuart Gillanders started in the trade in 1997 and started working
-            here in August 2005. He has been a certified Red Seal 310S Auto
-            Service Technician since October 2004.
+            Amber DeBoer started at Advantage Auto in 2024. She works the front desk
+            and is always ready to greet you with a smile when you bring your car in.
           </p>
         </div>
         <div className="staff-member">
